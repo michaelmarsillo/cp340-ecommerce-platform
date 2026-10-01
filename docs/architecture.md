@@ -6,7 +6,7 @@ The project is a **React + Vite + TypeScript static client**. Instructor approva
 
 The repository is intentionally a single client package. A separate backend workspace can be introduced when a later brief establishes actual server/database requirements. No empty backend, speculative auth system, or unused infrastructure is needed for this stage.
 
-`src/app/App.tsx` composes the shared shell and the Home feature. The only current page is the landing page; section navigation uses ordinary anchors. Add a routing library when the required standalone pages are implemented, keeping route composition in `src/app/`.
+`src/app/App.tsx` composes the shared shell and the Home (`/`) and Blog (`/blog`) routes. `src/main.tsx` wraps the app in React Router's `BrowserRouter`. Shared Home section links include the root path so they work from Blog as well. `vercel.json` sends page requests to `index.html`, allowing direct route visits and refreshes on Vercel. Node is pinned to the 22.x major version, with 22.12.0 as the minimum.
 
 ## Boundaries
 

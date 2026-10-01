@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-top">
         <div>
-          <a className="wordmark" href="#" aria-label="Moss and Mind home">
+          <a className="wordmark" href="/" aria-label="Moss and Mind home">
             <BrandMark className="wordmark-icon" />
             <span>
               moss <span className="wordmark-amp">&</span> mind

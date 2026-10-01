@@ -3,8 +3,8 @@ import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from '../ui/BrandMark';
 
 const navigation = [
-  { label: 'The collection', href: '#collection' },
-  { label: 'Our philosophy', href: '#philosophy' },
+  { label: 'The collection', href: '/#collection' },
+  { label: 'Our philosophy', href: '/#philosophy' },
   { label: 'Field notes', href: '/blog' },
 ];
 
@@ -28,7 +28,7 @@ export function SiteHeader() {
           }
         }}
       >
-        <a className="wordmark" href="#" aria-label="Moss and Mind home">
+        <a className="wordmark" href="/" aria-label="Moss and Mind home">
           <BrandMark className="wordmark-icon" />
           <span>
             moss <span className="wordmark-amp">&</span> mind
@@ -41,7 +41,7 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <a className="button button-small header-cta" href="#collection">
+        <a className="button button-small header-cta" href="/#collection">
           Find your ritual <ArrowUpRight size={16} aria-hidden="true" />
         </a>
         <button
@@ -66,7 +66,7 @@ export function SiteHeader() {
               {item.label}
             </a>
           ))}
-          <a href="#collection" onClick={() => setMenuOpen(false)}>
+          <a href="/#collection" onClick={() => setMenuOpen(false)}>
             Find your ritual <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </nav>

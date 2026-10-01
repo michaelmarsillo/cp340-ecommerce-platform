@@ -5,7 +5,7 @@
   "description": "Moss & Mind - a student-focused e-commerce concept for CP340.",
   "type": "module",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "node": "^22.12.0"
   },
   "scripts": {
     "dev": "vite",
@@ -20,7 +20,8 @@
   "dependencies": {
     "lucide-react": "^1.49.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
