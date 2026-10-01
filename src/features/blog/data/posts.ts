@@ -58,19 +58,5 @@ export const posts: readonly BlogPost[] = [
       'Each part of the site lives in its own feature folder, such as home, catalog, blog, about, and privacy. Shared pieces like the header, footer, and brand mark sit in a common components folder, and the colors, fonts, and spacing come from one set of design tokens.',
       'Product content is kept in a static data file, separate from the components that display it. That means a future catalog API could return the same shape without changing how the product cards look.',
     ],
-  },
-  {
-    id: 'privacy-first',
-    number: '004',
-    title: 'Why there’s nothing to sign up for.',
-    author: 'The Moss & Mind team',
-    date: 'October 2026',
-    readTime: '1 min read',
-    topic: 'Privacy',
-    summary:
-      'This site has no accounts, payment forms, analytics, marketing cookies, or third-party trackers. That was a deliberate choice for a course demo.',
-    body: [
-      'Your collection filter and menu choices stay in page memory and reset when you reload. When the site is hosted, the hosting provider may process standard connection data such as IP addresses and request logs. Our privacy page explains the details in plain words.',
-    ],
-  },
+  }
 ];
