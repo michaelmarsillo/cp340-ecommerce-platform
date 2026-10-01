@@ -2,7 +2,7 @@
 
 ## Decisions now
 
-The project is a **React + Vite + TypeScript static client**. Instructor approval for the custom platform was confirmed by the user on October 1, 2026. TypeScript provides shared contracts for a four-person team; Vite produces ordinary static files suitable for standard static hosting.
+The project is a **React + Vite + TypeScript static client**. Instructor approval for the custom platform was confirmed by the user on October 1, 2026. TypeScript provides shared contracts for the team; Vite produces ordinary static files suitable for standard static hosting.
 
 The repository is intentionally a single client package. A separate backend workspace can be introduced when a later brief establishes actual server/database requirements. No empty backend, speculative auth system, or unused infrastructure is needed for this stage.
 
@@ -44,7 +44,7 @@ These steps are conditional on the later briefs, which have not been provided.
 - **Authentication:** Put account/auth UI inside an `auth` feature and shared session setup in `app/`. Prefer a server-established secure session or another reviewed approach that fits the requirements. A protected client route is a usability feature; the server must authorize every protected operation.
 - **Cart/orders:** Add dedicated features and shared types when required. Server-side code must own authoritative prices, inventory, permissions, and order validation.
 - **Environment:** `.env.example` documents a possible future public API base URL. Every `VITE_` variable is bundled into client code. Never use it for database passwords, private API keys, or payment secrets.
-- **Testing:** CI currently checks typing, lint, formatting, and production compilation. Add focused automated tests for real cart calculations, API adapters, auth behavior, and routes as those features arrive; the browser review of this landing page is recorded in `docs/verification.md`.
+- **Testing:** Run `npm run check` and `npm run build` locally to check typing, lint, formatting, and production compilation. Add focused automated tests for real cart calculations, API adapters, auth behavior, and routes as those features arrive; the browser review of this landing page is recorded in `docs/verification.md`.
 
 ## Hosting and privacy
 
@@ -56,7 +56,7 @@ No analytics or third-party embeds are installed. Adding any service later means
 
 ## Collaboration conventions
 
-- Use feature branches and small reviewed PRs.
+- Create a feature branch and push it to GitHub; no PR template or PR workflow is required.
 - Share decisions before modifying layout, tokens, config, or product contracts.
 - Run `npm run check` and `npm run build` before merging.
 - Keep `package-lock.json` in Git and install with `npm ci` for consistent versions.

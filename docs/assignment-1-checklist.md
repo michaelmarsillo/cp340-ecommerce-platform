@@ -34,7 +34,8 @@ Source: `Assignment 1-V1.pdf` supplied by the user. Due **October 4, 2026, at 11
 
 ## Final verification and submission
 
-- [ ] Replace Member 1–4 in the team plan with actual owners.
+- [x] Record all five team members and propose page ownership in the team plan.
+- [ ] Confirm the proposed ownership with the group.
 - [x] Share the starter project through the connected GitHub repository.
 - [ ] Run `npm ci`, `npm run check`, and `npm run build` after final integration.
 - [ ] Deploy the final build and record the public website URL.

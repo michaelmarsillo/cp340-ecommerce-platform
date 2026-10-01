@@ -9,7 +9,7 @@ Verified locally on **October 1, 2026**. This records the starter’s actual val
 - Dependency installation reports zero known vulnerabilities at installation time.
 - `origin` points to `https://github.com/michaelmarsillo/cp340-ecommerce-platform.git`; a remote listing succeeded and the remote was empty at setup time.
 
-The starter history is organized into six focused commits: client tooling, shared layout, catalog, landing page, CI, and project documentation. Check GitHub Actions for the remote CI result after publication. A public website has not been deployed.
+The starter was published in six focused commits. The GitHub workflow, PR template, and shared VS Code settings were subsequently removed to keep the repository simple. Quality checks remain available locally through the npm scripts. A public website has not been deployed.
 
 ## Browser review
 

@@ -23,7 +23,7 @@ export function FieldNote() {
         </div>
         <h3>Welcome to a little more balance.</h3>
         <p>
-          We’re a group of four students creating Moss & Mind for our CP340 e-commerce project. We
+          We’re a group of five students creating Moss & Mind for our CP340 e-commerce project. We
           wanted to imagine a store that understands the rhythm of student life: early classes, busy
           weeks, and all the moments in between.
         </p>
