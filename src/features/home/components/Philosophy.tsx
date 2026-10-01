@@ -45,8 +45,8 @@ export function Philosophy() {
             Student life is full of possibility. And sometimes, a very full calendar. We’re building
             Moss & Mind around one simple idea: make a little more room for yourself along the way.
           </p>
-          <a className="text-link" href="#field-notes">
-            Read our first field note <ArrowUpRight size={17} aria-hidden="true" />
+          <a className="text-link" href="/about">
+            More about Moss & Mind <ArrowUpRight size={17} aria-hidden="true" />
           </a>
         </div>
       </div>

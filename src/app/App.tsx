@@ -1,8 +1,13 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { SiteHeader } from '../components/layout/SiteHeader';
 import { SiteFooter } from '../components/layout/SiteFooter';
 import { HomePage } from '../features/home/HomePage';
 import { BlogPage } from '../features/blog/BlogPage';
+
+const AboutPage = lazy(() =>
+  import('../features/about/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })),
+);
 
 export function App() {
   return (
@@ -15,6 +20,14 @@ export function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={null}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
         </Routes>
       </main>
       <SiteFooter />

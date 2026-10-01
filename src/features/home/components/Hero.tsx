@@ -38,7 +38,7 @@ export function Hero() {
           <a className="button" href="#collection">
             Explore the collection <ArrowUpRight size={18} aria-hidden="true" />
           </a>
-          <a className="hero-secondary" href="#philosophy">
+          <a className="hero-secondary" href="/about">
             Get to know us <span aria-hidden="true">↗</span>
           </a>
         </div>
