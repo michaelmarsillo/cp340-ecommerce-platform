@@ -1,6 +1,6 @@
 import { SiteHeader } from '../components/layout/SiteHeader';
 import { SiteFooter } from '../components/layout/SiteFooter';
-import { ProductCollection } from '../features/catalog/components/ProductCollection';
+import { HomePage } from '../features/home/HomePage';
 
 export function App() {
   return (
@@ -10,11 +10,7 @@ export function App() {
       </a>
       <SiteHeader />
       <main id="main-content">
-        <div className="container">
-          <h1>Moss & Mind</h1>
-          <p>A little more balance. One semester at a time.</p>
-        </div>
-        <ProductCollection />
+        <HomePage />
       </main>
       <SiteFooter />
     </>
