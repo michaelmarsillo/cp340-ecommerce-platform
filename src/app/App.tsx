@@ -1,5 +1,6 @@
 import { SiteHeader } from '../components/layout/SiteHeader';
 import { SiteFooter } from '../components/layout/SiteFooter';
+import { ProductCollection } from '../features/catalog/components/ProductCollection';
 
 export function App() {
   return (
@@ -8,9 +9,12 @@ export function App() {
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main-content" className="container">
-        <h1>Moss & Mind</h1>
-        <p>A little more balance. One semester at a time.</p>
+      <main id="main-content">
+        <div className="container">
+          <h1>Moss & Mind</h1>
+          <p>A little more balance. One semester at a time.</p>
+        </div>
+        <ProductCollection />
       </main>
       <SiteFooter />
     </>
