@@ -5,7 +5,7 @@ import { BrandMark } from '../ui/BrandMark';
 const navigation = [
   { label: 'The collection', href: '/#collection' },
   { label: 'Our philosophy', href: '/#philosophy' },
-  { label: 'Field notes', href: '/blog' },
+  { label: 'Field notes', href: '#/blog' },
 ];
 
 export function SiteHeader() {
