@@ -45,7 +45,7 @@ export function FieldNote() {
           <p>
             Thanks for being here at the beginning.
             <br />
-            <strong>— The Moss & Mind team</strong>
+            <strong>- The Moss & Mind team</strong>
           </p>
         </details>
       </article>

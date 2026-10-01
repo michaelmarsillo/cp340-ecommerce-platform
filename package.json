@@ -2,7 +2,7 @@
   "name": "moss-and-mind",
   "private": true,
   "version": "0.1.0",
-  "description": "Moss & Mind — a student-focused e-commerce concept for CP340.",
+  "description": "Moss & Mind - a student-focused e-commerce concept for CP340.",
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
