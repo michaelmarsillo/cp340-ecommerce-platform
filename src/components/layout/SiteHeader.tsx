@@ -3,9 +3,9 @@ import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from '../ui/BrandMark';
 
 const navigation = [
-  { label: 'The collection', href: '#collection' },
-  { label: 'Our philosophy', href: '#philosophy' },
-  { label: 'Field notes', href: '#field-notes' },
+  { label: 'The collection', href: '/#collection' },
+  { label: 'Our philosophy', href: '/#philosophy' },
+  { label: 'Field notes', href: '/blog' },
 ];
 
 export function SiteHeader() {
