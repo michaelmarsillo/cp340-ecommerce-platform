@@ -1,4 +1,3 @@
-import { ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../../components/layout/PageHeader';
 import { posts } from './data/posts';
 import './blog.css';
@@ -32,9 +31,7 @@ export function BlogPage() {
               <h2 id={`post-${post.id}`}>{post.title}</h2>
               <p>{post.summary}</p>
               <details className="blog-post-details">
-                <summary>
-                  Read the rest <ArrowUpRight size={17} aria-hidden="true" />
-                </summary>
+                <summary>Read the rest</summary>
                 {post.body.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}

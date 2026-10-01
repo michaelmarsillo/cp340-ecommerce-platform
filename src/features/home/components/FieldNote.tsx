@@ -32,22 +32,9 @@ export function FieldNote() {
           wrapped in a calmer corner of the internet. This first chapter is about the idea, the
           design, and the people we’re building it for.
         </p>
-        <details className="field-note-details">
-          <summary>
-            Read the rest of our note <ArrowUpRight size={17} aria-hidden="true" />
-          </summary>
-          <p>
-            As the project grows, we’ll develop the store’s pages, share more field notes, and
-            explore how an e-commerce platform works behind the scenes. For now, the products and
-            packaging are fictional. We’re excited to learn together and give this idea room to
-            grow.
-          </p>
-          <p>
-            Thanks for being here at the beginning.
-            <br />
-            <strong>- The Moss & Mind team</strong>
-          </p>
-        </details>
+        <a className="field-note-link" href="/blog">
+          Read the rest of our note <ArrowUpRight size={17} aria-hidden="true" />
+        </a>
       </article>
     </section>
   );

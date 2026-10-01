@@ -54,8 +54,7 @@
 .blog-post-details summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: flex-end;
   min-height: 38px;
   border-bottom: 1px solid #bcc3b2;
   font-size: 13px;
@@ -64,10 +63,6 @@
 
 .blog-post-details summary::-webkit-details-marker {
   display: none;
-}
-
-.blog-post-details[open] summary svg {
-  transform: rotate(90deg);
 }
 
 .blog-footnote {
