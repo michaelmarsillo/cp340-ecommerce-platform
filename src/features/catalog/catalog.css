@@ -1,3 +1,21 @@
+.filter-button {
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  min-height: 36px;
+  padding: 8px 18px;
+  font-size: 10px;
+  line-height: 1.2;
+  transition: background 150ms;
+}
+.filter-button:hover {
+  background: #e9ecdf;
+}
+.filter-button.is-active {
+  background: #e2e7d8;
+  border-color: #e2e7d8;
+  color: #3e5039;
+}
 .product-illustration {
   width: 132px;
   position: relative;
@@ -387,5 +405,11 @@
   }
   .dialog-copy {
     padding: 25px;
+  }
+}
+
+@media (max-width: 420px) {
+  .filter-button {
+    padding: 8px 14px;
   }
 }

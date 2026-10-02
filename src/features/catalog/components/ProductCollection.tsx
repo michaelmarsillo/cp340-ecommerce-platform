@@ -8,7 +8,12 @@ import { ProductDetails } from './ProductDetails';
 import { formatCurrency } from '../../../lib/formatCurrency';
 import '../catalog.css';
 
-export function ProductCollection() {
+type ProductCollectionProps = {
+  variant?: 'preview' | 'full';
+};
+
+export function ProductCollection({ variant = 'preview' }: ProductCollectionProps) {
+  const isFullCollection = variant === 'full';
   const [filter, setFilter] = useState<CatalogFilter>('All rituals');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const visibleProducts = products.filter(
@@ -17,22 +22,28 @@ export function ProductCollection() {
 
   return (
     <section
-      className="collection-section section-space container"
+      className={`collection-section container ${isFullCollection ? 'collection-full' : 'section-space'}`}
       id="collection"
       aria-labelledby="collection-title"
     >
-      <div className="section-heading">
-        <div>
-          <span className="eyebrow">THE EVERYDAY COLLECTION</span>
-          <h2 id="collection-title">
-            Small rituals. <em>Fresh starts.</em>
-          </h2>
+      {isFullCollection ? (
+        <h2 id="collection-title" className="collection-grid-title">
+          Find your everyday.
+        </h2>
+      ) : (
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">THE EVERYDAY COLLECTION</span>
+            <h2 id="collection-title">
+              Small rituals. <em>Fresh starts.</em>
+            </h2>
+          </div>
+          <p>
+            For the early lectures, the late chapters,
+            <br className="desktop-break" /> and everything in between.
+          </p>
         </div>
-        <p>
-          For the early lectures, the late chapters,
-          <br className="desktop-break" /> and everything in between.
-        </p>
-      </div>
+      )}
       <div className="collection-toolbar">
         <div className="collection-filters" role="group" aria-label="Filter the collection">
           {catalogFilters.map((category) => (
@@ -48,7 +59,9 @@ export function ProductCollection() {
           ))}
         </div>
         <span className="collection-count" aria-live="polite">
-          {visibleProducts.length} little possibilities
+          {isFullCollection
+            ? `${visibleProducts.length} of ${products.length} products`
+            : `${visibleProducts.length} little possibilities`}
         </span>
       </div>
       <div className="product-grid">
@@ -71,6 +84,12 @@ export function ProductCollection() {
                 <ArrowUpRight size={20} />
               </span>
             </button>
+            {isFullCollection && (
+              <div className="product-specification">
+                <span>{product.category}</span>
+                <span>{product.format}</span>
+              </div>
+            )}
             <div className="product-info">
               <div>
                 <h3>
@@ -88,7 +107,9 @@ export function ProductCollection() {
         ))}
       </div>
       <p className="collection-note">
-        A peek at our concept collection. All products and prices are illustrative.
+        {isFullCollection
+          ? 'Thoughtfully imagined. Our concept products and prices are illustrative; nothing is available to purchase.'
+          : 'A peek at our concept collection. All products and prices are illustrative.'}
       </p>
       <ProductDetails product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </section>
