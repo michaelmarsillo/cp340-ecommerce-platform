@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Leaf, Sparkles } from 'lucide-react';
 import { BrandMark } from '../../../components/ui/BrandMark';
 import { ProductIllustration } from '../../catalog/components/ProductIllustration';
@@ -35,9 +36,9 @@ export function Hero() {
           world that keeps you busy.
         </p>
         <div className="hero-actions">
-          <a className="button" href="#collection">
+          <Link className="button" to="/collection">
             Explore the collection <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
+          </Link>
           <a className="hero-secondary" href="/about">
             Get to know us <span aria-hidden="true">↗</span>
           </a>

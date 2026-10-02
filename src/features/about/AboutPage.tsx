@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { ArrowUpRight, BookOpen, Leaf, Sparkles } from 'lucide-react';
 import { BottleScene } from './BottleScene';
@@ -90,9 +91,9 @@ export function AboutPage() {
           ingredients and health effects have not been established. We&apos;re sharing the idea and
           the intention behind it, one small step at a time.
         </p>
-        <a className="button" href="/#collection">
+        <Link className="button" to="/collection">
           Explore the collection <ArrowUpRight size={17} aria-hidden="true" />
-        </a>
+        </Link>
       </section>
     </>
   );

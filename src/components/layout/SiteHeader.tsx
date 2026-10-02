@@ -1,9 +1,10 @@
+import { Link, NavLink } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from '../ui/BrandMark';
 
 const navigation = [
-  { label: 'The collection', href: '/#collection' },
+  { label: 'The collection', href: '/collection' },
   { label: 'Our philosophy', href: '/#philosophy' },
   { label: 'About us', href: '/about' },
   { label: 'Field notes', href: '/blog' },
@@ -36,15 +37,21 @@ export function SiteHeader() {
           </span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) =>
+            item.href !== '/collection' ? (
+              <a key={item.href} href={item.href}>
+                {item.label}
+              </a>
+            ) : (
+              <NavLink key={item.href} to={item.href}>
+                {item.label}
+              </NavLink>
+            ),
+          )}
         </nav>
-        <a className="button button-small header-cta" href="/#collection">
+        <Link className="button button-small header-cta" to="/collection">
           Find your ritual <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
+        </Link>
         <button
           ref={menuButtonRef}
           className="menu-toggle"
@@ -62,14 +69,20 @@ export function SiteHeader() {
           aria-label="Mobile navigation"
           hidden={!menuOpen}
         >
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
-              {item.label}
-            </a>
-          ))}
-          <a href="/#collection" onClick={() => setMenuOpen(false)}>
+          {navigation.map((item) =>
+            item.href !== '/collection' ? (
+              <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+                {item.label}
+              </a>
+            ) : (
+              <NavLink key={item.href} to={item.href} onClick={() => setMenuOpen(false)}>
+                {item.label}
+              </NavLink>
+            ),
+          )}
+          <Link to="/collection" onClick={() => setMenuOpen(false)}>
             Find your ritual <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
+          </Link>
         </nav>
       </header>
     </>
