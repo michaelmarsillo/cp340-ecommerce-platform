@@ -37,11 +37,11 @@ export function Hero() {
         </p>
         <div className="hero-actions">
           <Link className="button" to="/collection">
-            Explore the collection <ArrowUpRight size={18} aria-hidden="true" />
+            Explore products <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
-          <a className="hero-secondary" href="/about">
-            Get to know us <span aria-hidden="true">↗</span>
-          </a>
+          <Link className="hero-secondary" to="/about">
+            About Moss & Mind <span aria-hidden="true">↗</span>
+          </Link>
         </div>
         <div className="hero-footnote">
           <Leaf size={16} aria-hidden="true" /> Rooted in simple rituals. Inspired by student life.

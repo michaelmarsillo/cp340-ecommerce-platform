@@ -1,0 +1,28 @@
+.privacy-content {
+  padding-block: 48px 70px;
+  max-width: 760px;
+}
+.privacy-content section + section {
+  margin-top: 36px;
+}
+.privacy-content h2 {
+  font-size: clamp(26px, 3vw, 33px);
+}
+.privacy-content p,
+.privacy-content ul {
+  margin-top: 16px;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.privacy-content li + li {
+  margin-top: 10px;
+}
+.privacy-content p a {
+  color: var(--color-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.privacy-content > .text-link {
+  margin-top: 36px;
+}

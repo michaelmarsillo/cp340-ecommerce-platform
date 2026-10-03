@@ -12,7 +12,7 @@ export function AboutPage() {
       <section className="about-story" aria-labelledby="about-title">
         <div className="about-story-copy">
           <div className="about-intro">
-            <span className="eyebrow">A LITTLE ABOUT MOSS & MIND</span>
+            <span className="eyebrow">ABOUT / MOSS & MIND</span>
             <h1 id="about-title">
               Made for minds <em>in motion.</em>
             </h1>
@@ -92,7 +92,7 @@ export function AboutPage() {
           the intention behind it, one small step at a time.
         </p>
         <Link className="button" to="/collection">
-          Explore the collection <ArrowUpRight size={17} aria-hidden="true" />
+          Explore products <ArrowUpRight size={17} aria-hidden="true" />
         </Link>
       </section>
     </>

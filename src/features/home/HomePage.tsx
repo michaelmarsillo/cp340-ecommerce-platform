@@ -26,7 +26,7 @@ export function HomePage() {
           <em>A little more possibility.</em>
         </p>
         <Link className="button" to="/collection">
-          Find your everyday ritual <span aria-hidden="true">↗</span>
+          Browse all products <span aria-hidden="true">↗</span>
         </Link>
       </div>
     </>

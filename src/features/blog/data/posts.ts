@@ -55,7 +55,7 @@ export const posts: readonly BlogPost[] = [
     summary:
       'Moss & Mind is a React and TypeScript app built with Vite and hosted on Vercel. Here is how we kept it simple.',
     body: [
-      'Each part of the site lives in its own feature folder, such as home, catalog, blog, about, and privacy. Shared pieces like the header, footer, and brand mark sit in a common components folder, and the colors, fonts, and spacing come from one set of design tokens.',
+      'Each page lives in a feature folder: home, catalog, blog, about, or privacy. Shared pieces like the header, footer, and brand mark sit in a common components folder, and the colors, fonts, and spacing come from one set of design tokens.',
       'Product content is kept in a static data file, separate from the components that display it. That means a future catalog API could return the same shape without changing how the product cards look.',
     ],
   },

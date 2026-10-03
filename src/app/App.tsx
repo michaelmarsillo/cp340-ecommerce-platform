@@ -5,6 +5,9 @@ import { SiteFooter } from '../components/layout/SiteFooter';
 import { CollectionPage } from '../features/catalog/CollectionPage';
 import { HomePage } from '../features/home/HomePage';
 import { BlogPage } from '../features/blog/BlogPage';
+import { PrivacyPage } from '../features/privacy/PrivacyPage';
+import { NotFoundPage } from './NotFoundPage';
+import { RouteEffects } from './RouteEffects';
 
 const AboutPage = lazy(() =>
   import('../features/about/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })),
@@ -13,6 +16,7 @@ const AboutPage = lazy(() =>
 export function App() {
   return (
     <>
+      <RouteEffects />
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
@@ -25,11 +29,19 @@ export function App() {
           <Route
             path="/about"
             element={
-              <Suspense fallback={null}>
+              <Suspense
+                fallback={
+                  <p className="container route-loading" role="status">
+                    Loading About...
+                  </p>
+                }
+              >
                 <AboutPage />
               </Suspense>
             }
           />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <SiteFooter />

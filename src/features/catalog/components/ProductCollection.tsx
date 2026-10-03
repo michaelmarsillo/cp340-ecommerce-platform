@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { products, catalogFilters } from '../data/products';
 import type { CatalogFilter } from '../data/products';
 import type { Product } from '../types';
@@ -111,6 +112,11 @@ export function ProductCollection({ variant = 'preview' }: ProductCollectionProp
           ? 'Thoughtfully imagined. Our concept products and prices are illustrative; nothing is available to purchase.'
           : 'A peek at our concept collection. All products and prices are illustrative.'}
       </p>
+      {!isFullCollection && (
+        <Link className="text-link collection-page-link" to="/collection">
+          View all products <ArrowUpRight size={17} aria-hidden="true" />
+        </Link>
+      )}
       <ProductDetails product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </section>
   );

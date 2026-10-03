@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function FieldNote() {
   return (
@@ -8,7 +9,7 @@ export function FieldNote() {
       aria-labelledby="field-note-title"
     >
       <div className="field-note-intro">
-        <span className="eyebrow">FIELD NOTES / NO. 001</span>
+        <span className="eyebrow">FROM THE BLOG / NO. 001</span>
         <h2 id="field-note-title">
           Good things
           <br />
@@ -32,9 +33,9 @@ export function FieldNote() {
           wrapped in a calmer corner of the internet. This first chapter is about the idea, the
           design, and the people we’re building it for.
         </p>
-        <a className="field-note-link" href="/blog">
-          Read the rest of our note <ArrowUpRight size={17} aria-hidden="true" />
-        </a>
+        <Link className="field-note-link" to="/blog">
+          Read more on the Blog <ArrowUpRight size={17} aria-hidden="true" />
+        </Link>
       </article>
     </section>
   );

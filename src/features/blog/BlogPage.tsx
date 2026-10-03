@@ -6,7 +6,7 @@ export function BlogPage() {
   return (
     <>
       <PageHeader
-        eyebrow="FIELD NOTES"
+        eyebrow="BLOG / FIELD NOTES"
         title={
           <>
             Notes from the <em>growing</em> project.

@@ -168,6 +168,16 @@ button {
 .desktop-nav a:hover {
   color: #798466;
 }
+.desktop-nav a[aria-current='page'],
+.mobile-nav a[aria-current='page'] {
+  color: var(--color-forest);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.route-loading {
+  padding-block: 70px;
+  color: var(--color-muted);
+}
 .menu-toggle {
   display: none;
   padding: 10px;

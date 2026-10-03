@@ -1,4 +1,5 @@
 import { ArrowUpRight, BookOpen, Coffee, Sprout } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { BrandMark } from '../../../components/ui/BrandMark';
 
 const values = [
@@ -45,9 +46,9 @@ export function Philosophy() {
             Student life is full of possibility. And sometimes, a very full calendar. We’re building
             Moss & Mind around one simple idea: make a little more room for yourself along the way.
           </p>
-          <a className="text-link" href="/about">
-            More about Moss & Mind <ArrowUpRight size={17} aria-hidden="true" />
-          </a>
+          <Link className="text-link" to="/about">
+            Read about Moss & Mind <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
         </div>
       </div>
       <div className="container values-grid">

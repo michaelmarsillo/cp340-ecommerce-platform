@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { BrandMark } from '../ui/BrandMark';
 
 export function SiteFooter() {
@@ -6,12 +7,12 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-top">
         <div>
-          <a className="wordmark" href="/" aria-label="Moss and Mind home">
+          <Link className="wordmark" to="/" aria-label="Moss and Mind home">
             <BrandMark className="wordmark-icon" />
             <span>
               moss <span className="wordmark-amp">&</span> mind
             </span>
-          </a>
+          </Link>
           <p>A little more balance. One semester at a time.</p>
         </div>
         <a className="text-link" href="#main-content">
@@ -20,7 +21,7 @@ export function SiteFooter() {
       </div>
       <div className="container footer-bottom">
         <p>© {new Date().getFullYear()} Moss & Mind · A CP340 student project</p>
-        <a href="#privacy">Privacy & demo information</a>
+        <Link to="/privacy">Privacy & demo information</Link>
       </div>
       <div className="container demo-notice" id="privacy">
         <p>
@@ -31,9 +32,9 @@ export function SiteFooter() {
           memory and reset on reload.
         </p>
         <p>
-          When the site is hosted, the hosting provider may process standard connection data, such
-          as IP addresses and request logs. A complete privacy page and hosting settings are part of
-          the next assignment tasks.
+          Hosted on Vercel, which may process connection information such as IP addresses and
+          request logs to deliver and protect this website. Read our privacy notice for the demo's
+          settings and data handling.
         </p>
       </div>
     </footer>
