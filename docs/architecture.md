@@ -1,63 +1,75 @@
 # Client architecture
 
-## Decisions now
+Reviewed **October 2, 2026**, after the Assignment 1 navigation and privacy update. This describes the implemented client; remaining assignment tasks are in [assignment-1-checklist.md](assignment-1-checklist.md).
 
-The project is a **React + Vite + TypeScript static client**. Instructor approval for the custom platform was confirmed by the user on October 1, 2026. TypeScript provides shared contracts for the team; Vite produces ordinary static files suitable for standard static hosting.
+## Stack and routes
 
-The repository is intentionally a single client package. A separate backend workspace can be introduced when a later brief establishes actual server/database requirements. No empty backend, speculative auth system, or unused infrastructure is needed for this stage.
+The project is a **React + Vite + TypeScript static client**, deployed on Vercel at **https://mossandmind.vercel.app**. Michael Marsillo confirmed instructor approval for the custom platform on October 1. This is one client package with no backend, database, accounts, cart, or checkout.
 
-`src/app/App.tsx` composes the shared shell and the Home (`/`) and Blog (`/blog`) routes. `src/main.tsx` wraps the app in React Router's `BrowserRouter`. Shared Home section links include the root path so they work from Blog as well. `vercel.json` sends page requests to `index.html`, allowing direct route visits and refreshes on Vercel. Node is pinned to the 22.x major version, with 22.12.0 as the minimum.
+`src/main.tsx` wraps the app in React Router's `BrowserRouter`. `src/app/App.tsx` owns the shared header/footer and route composition:
 
-## Boundaries
+| Path          | Page                  | Implementation                             |
+| ------------- | --------------------- | ------------------------------------------ |
+| `/`           | Home                  | `features/home/HomePage.tsx`               |
+| `/collection` | Products              | `features/catalog/CollectionPage.tsx`      |
+| `/blog`       | Blog                  | `features/blog/BlogPage.tsx`               |
+| `/about`      | About / About Me page | Lazy-loaded `features/about/AboutPage.tsx` |
+| `/privacy`    | Privacy notice        | `features/privacy/PrivacyPage.tsx`         |
 
-| Area                 | Responsibility                                         | Rule                                                            |
-| -------------------- | ------------------------------------------------------ | --------------------------------------------------------------- |
-| `app/`               | Application composition, future routes/providers       | Import feature pages and shared layout here.                    |
-| `components/layout/` | Header/footer used across pages                        | Keep page-specific content inside features.                     |
-| `components/ui/`     | Shared presentation primitives                         | Avoid importing business feature data here.                     |
-| `features/home/`     | Landing page sections and page styles                  | Compose catalog components; do not copy catalog data.           |
-| `features/catalog/`  | Product contract, static catalog, product presentation | Keep data separate from rendering; use stable product IDs.      |
-| `lib/`               | Small cross-feature helpers                            | Add helpers when there are real consumers.                      |
-| `styles/`            | Global styles and reusable design tokens               | Use CSS custom properties for shared colors, type, and spacing. |
+The public menu names are Home, Products, About, and Blog. Products retains the existing `/collection` route. Privacy is at `/privacy`, linked from the footer; unknown routes show `app/NotFoundPage.tsx`. About loads through `React.lazy` and `Suspense` with a visible loading status. `vercel.json` rewrites page requests to `index.html` so direct visits and refreshes work.
 
-Product data lives in `features/catalog/data/products.ts`, with its shape in `features/catalog/types.ts`. Display prices using `lib/formatCurrency.ts`. All current catalog values are fictional. The local state for the filter, active product dialog, and mobile menu stays close to its UI; it is not persisted.
+Page navigation uses React Router `Link` and `NavLink`, including current-page indication. Main navigation contains pages rather than Home section shortcuts. `app/RouteEffects.tsx` centralizes page titles/descriptions and scroll reset; Home preserves direct hash-section visits for existing links. The native Back to the top link remains an in-page anchor.
 
-Catalog styles live with the catalog feature in `features/catalog/catalog.css`, so reusing its components on a dedicated Products page does not depend on rendering the Home page. Home-specific styles remain in `features/home/home.css`; shared heading and spacing styles live in the global stylesheet.
+## Boundaries and data
 
-Product packaging is drawn with CSS and the shared SVG flower. It needs no external image service, font provider, or tracking request. The native `<dialog>` supplies modal semantics, keyboard focus containment, and Escape handling. The page includes meaningful headings, labeled navigation, focus styles, and a reduced-motion preference.
+| Area                 | Responsibility                                       | Rule                                                                           |
+| -------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `app/`               | Routes and shared shell                              | Compose feature pages/providers here.                                          |
+| `components/layout/` | Header, footer, reusable page heading                | Keep feature content in its feature folder.                                    |
+| `components/ui/`     | Shared presentation primitives                       | Avoid importing business feature data.                                         |
+| `features/home/`     | Landing sections and previews                        | Reuse catalog components; link the Blog preview to `/blog`.                    |
+| `features/catalog/`  | Product contract, data, Collection, filters, dialogs | Keep stable IDs and data separate from rendering.                              |
+| `features/blog/`     | Blog page and static posts                           | Keep post content in `data/posts.ts`; expand full posts with native `details`. |
+| `features/about/`    | About content and 3D bottle scene                    | Keep Three.js and scene lifecycle inside this feature.                         |
+| `features/privacy/`  | Course-demo privacy notice                           | Match the deployed configuration and actual services.                          |
+| `lib/`               | Cross-feature helpers                                | Add helpers when there are real consumers.                                     |
+| `styles/`            | Global styles and design tokens                      | Reuse CSS properties for colors, type, and spacing.                            |
+| `public/`            | Favicon and local bottle model                       | Static files are publicly served; never store secrets here.                    |
 
-## Adding the remaining Assignment 1 pages
+Product data lives in `features/catalog/data/products.ts`; its contract is in `features/catalog/types.ts`. `lib/formatCurrency.ts` formats CAD prices. All five products and prices are fictional. `ProductCollection` supports a Home preview and a full Collection variant using the same filters, cards, and `ProductDetails` dialog.
 
-1. Add `features/blog/BlogPage.tsx`, `features/about/AboutPage.tsx`, and `features/privacy/PrivacyPage.tsx` when the owners implement them. Add the dedicated `ProductsPage.tsx` under `features/catalog/`, reusing the existing collection/data.
-2. Agree on stable paths such as `/`, `/blog`, `/about`, `/products`, and `/privacy`.
-3. Centralize routing in `app/` and update shared navigation. Keep the Home anchors only where they still make sense.
-4. Choose browser routes only if the host supports rewriting missing paths to `index.html`. Otherwise choose hash routing or an equivalent supported deployment strategy.
-5. Verify opening every page URL directly, reloading it, navigating back, and following internal links on the public host.
-6. Set useful titles/descriptions for each page and update the privacy notice to reflect the deployed site.
+Blog has three static posts, including the introductory purpose post. Home's FieldNote is a separate preview component; its remaining-content link navigates to Blog. Changes to the introduction should keep these two representations consistent. Blog's Read the rest control expands in place and has no arrow.
+
+Menu state, category filters, selected products, and native Blog expansion are transient. The client does not implement cookie writes or persistent browser storage.
+
+## Visuals and accessibility
+
+Product cards use CSS packaging illustrations and the shared SVG brand mark. About additionally uses **Three.js** and `GLTFLoader` to load `public/models/moss_mind_daily_focus_bottle.glb` from the same host. The model is approximately 1.3 MB; About's separate JS chunk is approximately 617 kB before gzip in the reviewed build. Vite reports a non-blocking chunk-size warning.
+
+`BottleScene` resizes the canvas, renders scroll-driven rotation, responds to reduced-motion preferences, and cleans up listeners, animation frames, and rendering resources. A CSS product illustration is the fallback when renderer creation or model loading fails. The fallback and reduced-motion behavior were reviewed in code, not forced in the October 2 browser audit.
+
+Native product `dialog` provides modal semantics and Escape behavior; cleanup restores scrolling and focus. The site includes a skip link, labeled navigation, headings, focus styles, and responsive layouts. Browser checks are recorded in [verification.md](verification.md); they do not replace a full accessibility audit.
+
+## Deployment and privacy
+
+Node is constrained to **22.x, minimum 22.12.0**, in `package.json`. Install with `npm ci`, build with `npm run build`, and serve `dist/`. Vercel currently builds `main` successfully using Node 22; its dashboard setting still says 24, producing an informational override warning. Local dev and preview servers are not submission hosting.
+
+No analytics SDK, external font service, third-party embed, or application data-collection endpoint is implemented in the reviewed source. This does not establish the hosting dashboard's configuration or mean the host processes no connection data. Vercel's [privacy notice](https://vercel.com/legal/privacy-notice) describes technical/request information it processes.
+
+The shared footer identifies Vercel and links to `features/privacy/PrivacyPage.tsx`. The course demo uses `noindex, nofollow` in HTML and an `X-Robots-Tag` response header, `no-referrer` in HTML and a Referrer-Policy header, and a Permissions-Policy header disabling camera, microphone, and geolocation. Deployment source/build logs remain protected through Vercel project settings; public source is not opted into. These are explicit course-demo choices; indexing directives do not provide access control. Public evaluator access is verified separately from the project's existing Vercel deployment protection. See [Vercel headers configuration](https://vercel.com/docs/project-configuration/vercel-json#headers) and [deployment protection](https://vercel.com/docs/deployment-protection).
+
+The Assignment 1 PDF requires privacy settings but does not explicitly require a separate Privacy page. The group chose `/privacy` to make the data-handling notice easy to find. Hosting-provider logs remain distinct from application tracking; no custom retention period is promised.
 
 ## Extending later
 
-These steps are conditional on the later briefs, which have not been provided.
+Assignments 2 and 3 have not been supplied. Add infrastructure when their requirements are known:
 
-- **API access:** Add a small `lib/api/` HTTP client only when a server exists. Put catalog-specific fetch/mapping code inside `features/catalog/`. Handle loading, errors, empty results, and server validation explicitly.
-- **Backend/database:** Introduce a separately configured server package or service when the group selects a stack. Database credentials and migrations belong on the server; the browser must not connect directly with privileged credentials.
-- **Authentication:** Put account/auth UI inside an `auth` feature and shared session setup in `app/`. Prefer a server-established secure session or another reviewed approach that fits the requirements. A protected client route is a usability feature; the server must authorize every protected operation.
-- **Cart/orders:** Add dedicated features and shared types when required. Server-side code must own authoritative prices, inventory, permissions, and order validation.
-- **Environment:** `.env.example` documents a possible future public API base URL. Every `VITE_` variable is bundled into client code. Never use it for database passwords, private API keys, or payment secrets.
-- **Testing:** Run `npm run check` and `npm run build` locally to check typing, lint, formatting, and production compilation. Add focused automated tests for real cart calculations, API adapters, auth behavior, and routes as those features arrive; the browser review of this landing page is recorded in `docs/verification.md`.
+- **API/backend/database:** introduce a server package or service when needed. Keep catalog fetching/mapping in its feature and shared HTTP helpers in `lib/api/`. Database credentials, migrations, authoritative prices, and validation belong on the server.
+- **Authentication:** put account UI in an `auth` feature and session setup in `app/`. Server-side authorization must protect operations; a client route guard alone is insufficient.
+- **Cart/orders:** add dedicated features and shared types when required; the server must validate prices, inventory, and permissions.
+- **Environment:** `.env.example` documents a possible future public API base URL. `VITE_` values are bundled into client code and must not contain private credentials.
+- **Verification:** run `npm run check` and `npm run build` before integration. Add focused tests when real business logic, API adapters, or authentication arrive.
 
-## Hosting and privacy
+## Collaboration
 
-The production output is `dist/`. Build command: `npm ci && npm run build`. This is a static build; there is no server-rendered runtime. The local development and preview servers are not submission hosting.
-
-Before deploying, select the actual provider, verify its public-access settings, and document what it logs. Decide whether the course demo should be indexed, then use settings supported by that host. A search-indexing directive is not access control. If content needs restricted access, use actual host access controls and coordinate evaluator access with the instructor.
-
-No analytics or third-party embeds are installed. Adding any service later means reviewing data handling and updating the privacy page/settings. Do not add a nonfunctional cookie banner just to look compliant; configure the services the site actually uses.
-
-## Collaboration conventions
-
-- Create a feature branch and push it to GitHub; no PR template or PR workflow is required.
-- Share decisions before modifying layout, tokens, config, or product contracts.
-- Run `npm run check` and `npm run build` before merging.
-- Keep `package-lock.json` in Git and install with `npm ci` for consistent versions.
-- Keep names descriptive and split components by responsibility, rather than by arbitrary line count.
+Push focused feature branches and coordinate integration with the group. There is no required PR template or shared VS Code configuration. Keep the lockfile committed, coordinate shared contracts/layout/tokens, and update these docs when routes, dependencies, hosting behavior, or data handling change.

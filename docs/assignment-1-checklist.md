@@ -1,47 +1,55 @@
 # Assignment 1 submission checklist
 
-Source: `Assignment 1-V1.pdf` supplied by the user. Due **October 4, 2026, at 11:59 p.m. America/Toronto**. This checklist translates the brief into team tasks; it does not submit anything automatically.
+Reviewed **October 2, 2026**, against `Assignment 1-V1.pdf`. Due **Sunday, October 4, 2026, at 11:59 p.m. America/Toronto**. Groups may have up to five members; only one member needs to submit the website link through Assignment 1 Dropbox.
 
-## Platform selection
-
-- [x] Select React + Vite for the custom client.
-- [x] Confirm instructor approval for a platform outside the listed recommendations; user confirmed approval on October 1.
+Public website: **https://mossandmind.vercel.app**. Individual task assignments have been removed. Checked implementation items refer to the integrated site; the final group review and submission remain open.
 
 ## Website structure - 6%
 
-- [x] Michael Marsillo: build the responsive Home landing page.
-- [ ] Arpit Das: implement a dedicated Blog page.
-- [ ] Gurshan Sidhar: implement a dedicated About Me page with actual team/project information.
-- [ ] Michael Marsillo: integrate page routing and shared navigation.
-- [ ] Gurshan Sidhar: verify all pages on desktop and mobile, including keyboard use.
-- [ ] Shailesh Mathrani: check direct links and refresh on the deployed host.
+- [x] React + Vite + TypeScript selected; instructor approval was confirmed by the user on October 1.
+- [x] Home page at `/`.
+- [x] Dedicated Blog at `/blog`.
+- [x] Dedicated About page at `/about`, covering the concept, purpose, and philosophy.
+- [x] Clearly labeled Home, Products, About, and Blog navigation on desktop and mobile.
+- [x] Direct links, current-page indication, route titles, and scroll reset on page changes.
+- [x] Vercel SPA fallback supports direct visits and refreshes.
+- [ ] Final group approval of the content and a fresh/private-browser check on the deployed site.
+- [ ] Final physical-phone check; desktop and phone-width browser testing is recorded in [verification.md](verification.md).
 
 ## Product page - 2%
 
-- [x] Prepare at least five fictional offerings in the shared catalog.
-- [x] Show all five on the Home collection with working filters and details.
-- [ ] Eric Luo: implement a dedicated product page; the Home preview does not replace this requirement.
-- [ ] Review names, descriptions, prices, visuals, and demo labeling as a group.
+- [x] `/collection`, labeled Products, is the dedicated product page.
+- [x] Five fictional offerings: Daily Focus, Evening Unwind, Mindful Matcha, The Pause Tea, and The Semester Set.
+- [x] Descriptions, formats, CAD prices, illustrations, category filters, and working details dialogs.
+- [x] Home's product calls to action lead directly to the dedicated Products page.
+- [ ] Group approval of the final offerings and demo labeling before submission.
 
 ## Blog setup and privacy settings - 2%
 
-- [x] Draft an introductory field note on the landing page explaining the website purpose.
-- [ ] Arpit Das: publish the introduction on the dedicated Blog page.
-- [ ] Shailesh Mathrani: complete an accurate Privacy page for the selected deployment.
-- [x] Avoid unnecessary data collection in the initial client: no accounts, checkout, analytics, marketing cookies, or persistent browser storage.
-- [ ] Shailesh Mathrani: review and implement actual hosting privacy, visibility, and indexing settings.
-- [ ] Shailesh Mathrani: document hosting logs and any additional third-party services.
+- [x] Introductory Blog post identifies the student course project and discusses its purpose.
+- [x] Home's Blog preview links to `/blog`; Blog's Read the rest controls expand in place without navigation arrows.
+- [x] Privacy notice at `/privacy`, linked from the shared footer, explains temporary state, lack of application tracking, and Vercel hosting.
+- [x] Application has no accounts, checkout/payment forms, cookie writes, persistent storage, analytics SDK, or third-party embeds.
+- [x] Course-demo indexing policy: `noindex, nofollow` in HTML and Vercel's `X-Robots-Tag` response header.
+- [x] Referrer policy: `no-referrer` in HTML and the response header.
+- [x] Browser permissions policy disables camera, microphone, and geolocation, which this demo does not use.
+- [x] Vercel project configuration keeps deployment source/build logs private; public website access remains available for grading.
+- [x] Existing Vercel project protection configuration was read through the project API; the application's absence of analytics integration was checked in source. See verification for the scope of this evidence.
+
+The brief requires appropriate privacy settings but does not specify a particular switch or require a separate Privacy page. The group chose the documented settings above for this static course demo. Search-engine directives request exclusion; they do not restrict access. The site still discloses that Vercel may process technical connection data.
 
 ## Final verification and submission
 
-- [x] Record all five team members and propose page ownership in the team plan.
-- [ ] Confirm the proposed ownership with the group.
-- [x] Share the starter project through the connected GitHub repository.
-- [ ] Michael Marsillo: run `npm ci`, `npm run check`, and `npm run build` after final integration.
-- [ ] Shailesh Mathrani: deploy the final build and record the public website URL.
-- [ ] Gurshan Sidhar: visit the URL in an incognito window and on a phone.
-- [ ] Gurshan Sidhar: compare the finished site against this list.
-- [ ] Michael Marsillo: submit the **website URL** to Assignment 1 Dropbox.
-- [ ] Michael Marsillo: confirm successful submission before the deadline.
+- [x] Repository and public hosting are connected.
+- [x] All required pages are integrated.
+- [x] Local TypeScript, lint, formatting, and production-build checks pass.
+- [x] Deployment and live checks are recorded in [verification.md](verification.md).
+- [ ] Complete the final group content and real-device review.
+- [ ] Have one group member submit **https://mossandmind.vercel.app** to Assignment 1 Dropbox.
+- [ ] Retain successful submission confirmation before the deadline.
 
-**The GitHub repository URL and `localhost` are not the public website link requested by the brief.** Future database, login, and checkout requirements are unknown until the later briefs arrive.
+## Optional polish and future scope
+
+Adding team names/biographies to About is optional; the brief does not demand biographies. About's Three.js chunk-size warning does not prevent deployment, but performance can be improved later. Aligning Vercel's dashboard Node setting with package Node 22 would remove an informational warning.
+
+The PDF does not require individual URLs for every product, authentication, a database, a cart, or checkout. Those features should follow the actual Assignment 2 and 3 briefs. This version demonstrates a clearer browsing path without pretending to accept purchases.
