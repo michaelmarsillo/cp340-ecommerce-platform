@@ -74,7 +74,7 @@ export function PrivacyPage() {
             </li>
             <li>
               Deployment source and build logs are configured to require Vercel account access. The
-              course's GitHub repository is public.
+              public website remains accessible for course review.
             </li>
           </ul>
         </section>
