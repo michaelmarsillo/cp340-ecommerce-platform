@@ -40,7 +40,7 @@ export function Hero() {
             Explore products <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
           <Link className="hero-secondary" to="/about">
-            About Moss & Mind <span aria-hidden="true">↗</span>
+            About Moss & Mind <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
         <div className="hero-footnote">

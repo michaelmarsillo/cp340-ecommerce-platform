@@ -1,6 +1,6 @@
 # Verification record
 
-Updated **October 2, 2026**, after the navigation/privacy update. Verified production application commit: **`d5cc048acfaadbb91fa0e5baaa5ba3d4953af2f2`**. Public website: **https://mossandmind.vercel.app**. This record confirms implementation and sampled checks, not assignment submission.
+Updated **October 2, 2026**, after the navigation/privacy update. Initial navigation/privacy production application commit: **`d5cc048acfaadbb91fa0e5baaa5ba3d4953af2f2`**. Public website: **https://mossandmind.vercel.app**. This record confirms implementation and sampled checks, not assignment submission.
 
 ## Build and deployment
 
@@ -54,6 +54,15 @@ The Vercel project API returned existing `ssoProtection.deploymentType: all_exce
 Public deployment source was not opted into (`publicSource` returned null); an explicit project API request to keep it false was accepted. The file-based `public` property was rejected by the deployment validator, so it was removed and configuration was kept at project level. The corrected application deployment succeeded. The latest deployment metadata identifies the GitHub repository as **private**, superseding the original public-repository setup.
 
 Web Analytics and Speed Insights API fields contain allocated IDs but no enabled timestamps in the inspected response. The application has no integration scripts. This records the evidence without treating IDs alone as proof of enabled or disabled tracking. No hosting log-retention settings were changed or inferred.
+
+## Header and SVG follow-up
+
+The October 2 follow-up adds Privacy beside Blog in both navigation menus, preserves the footer privacy link, and hides the header's Browse products call to action on `/collection`. Home's About Moss & Mind and Browse all products arrows now use Lucide SVG icons instead of Unicode characters that can render as emoji.
+
+- `npm run check` and `npm run build` passed after this change.
+- Local production-preview checks at 821, 390, and 1280 pixels confirmed header layout, both SVG icons, mobile Privacy navigation, and the product CTA disappearing on Products and returning on Home.
+- No horizontal overflow at the checked 821-pixel breakpoint or error-level console messages in the sampled flow.
+- These viewport checks do not reproduce physical iOS Safari; the group should confirm the updated icons on an iPhone after deployment.
 
 ## Remaining group checks
 

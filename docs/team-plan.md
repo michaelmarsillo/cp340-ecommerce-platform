@@ -9,7 +9,7 @@ Updated **October 2, 2026**. The five team members listed for this repository ar
 - Five fictional offerings with filters, descriptions, CAD prices, and product dialogs.
 - Introductory Blog post explaining the website's purpose.
 - Three.js bottle visual on About, with a local model and an illustration fallback.
-- Clear Home / Products / About / Blog navigation and direct page links.
+- Clear Home / Products / About / Blog / Privacy navigation and direct page links.
 - Privacy notice at `/privacy`, no application trackers or persistent storage, and explicit browser/indexing privacy settings.
 - Public Vercel hosting at **https://mossandmind.vercel.app**.
 

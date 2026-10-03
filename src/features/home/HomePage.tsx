@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { ProductCollection } from '../catalog/components/ProductCollection';
 import { Philosophy } from './components/Philosophy';
@@ -26,7 +27,7 @@ export function HomePage() {
           <em>A little more possibility.</em>
         </p>
         <Link className="button" to="/collection">
-          Browse all products <span aria-hidden="true">↗</span>
+          Browse all products <ArrowUpRight size={18} aria-hidden="true" />
         </Link>
       </div>
     </>

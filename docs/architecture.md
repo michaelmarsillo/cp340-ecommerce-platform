@@ -16,7 +16,7 @@ The project is a **React + Vite + TypeScript static client**, deployed on Vercel
 | `/about`      | About / About Me page | Lazy-loaded `features/about/AboutPage.tsx` |
 | `/privacy`    | Privacy notice        | `features/privacy/PrivacyPage.tsx`         |
 
-The public menu names are Home, Products, About, and Blog. Products retains the existing `/collection` route. Privacy is at `/privacy`, linked from the footer; unknown routes show `app/NotFoundPage.tsx`. About loads through `React.lazy` and `Suspense` with a visible loading status. `vercel.json` rewrites page requests to `index.html` so direct visits and refreshes work.
+The public menu names are Home, Products, About, Blog, and Privacy. Products retains the existing `/collection` route. Privacy is at `/privacy`, linked from the header and footer; unknown routes show `app/NotFoundPage.tsx`. The header's Browse products call to action is hidden on Products, including in the mobile menu. Home's link arrows use SVG icons for consistent rendering across browsers. About loads through `React.lazy` and `Suspense` with a visible loading status. `vercel.json` rewrites page requests to `index.html` so direct visits and refreshes work.
 
 Page navigation uses React Router `Link` and `NavLink`, including current-page indication. Main navigation contains pages rather than Home section shortcuts. `app/RouteEffects.tsx` centralizes page titles/descriptions and scroll reset; Home preserves direct hash-section visits for existing links. The native Back to the top link remains an in-page anchor.
 

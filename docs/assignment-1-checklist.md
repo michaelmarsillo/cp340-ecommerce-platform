@@ -10,7 +10,7 @@ Public website: **https://mossandmind.vercel.app**. Individual task assignments 
 - [x] Home page at `/`.
 - [x] Dedicated Blog at `/blog`.
 - [x] Dedicated About page at `/about`, covering the concept, purpose, and philosophy.
-- [x] Clearly labeled Home, Products, About, and Blog navigation on desktop and mobile.
+- [x] Clearly labeled Home, Products, About, Blog, and Privacy navigation on desktop and mobile.
 - [x] Direct links, current-page indication, route titles, and scroll reset on page changes.
 - [x] Vercel SPA fallback supports direct visits and refreshes.
 - [ ] Final group approval of the content and a fresh/private-browser check on the deployed site.
@@ -28,7 +28,7 @@ Public website: **https://mossandmind.vercel.app**. Individual task assignments 
 
 - [x] Introductory Blog post identifies the student course project and discusses its purpose.
 - [x] Home's Blog preview links to `/blog`; Blog's Read the rest controls expand in place without navigation arrows.
-- [x] Privacy notice at `/privacy`, linked from the shared footer, explains temporary state, lack of application tracking, and Vercel hosting.
+- [x] Privacy notice at `/privacy`, linked from the shared header and footer, explains temporary state, lack of application tracking, and Vercel hosting.
 - [x] Application has no accounts, checkout/payment forms, cookie writes, persistent storage, analytics SDK, or third-party embeds.
 - [x] Course-demo indexing policy: `noindex, nofollow` in HTML and Vercel's `X-Robots-Tag` response header.
 - [x] Referrer policy: `no-referrer` in HTML and the response header.

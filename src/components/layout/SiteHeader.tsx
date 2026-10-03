@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useMatch } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from '../ui/BrandMark';
@@ -8,9 +8,11 @@ const navigation = [
   { label: 'Products', href: '/collection' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Privacy', href: '/privacy' },
 ];
 
 export function SiteHeader() {
+  const onProductsPage = useMatch('/collection') !== null;
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -43,9 +45,11 @@ export function SiteHeader() {
             </NavLink>
           ))}
         </nav>
-        <Link className="button button-small header-cta" to="/collection">
-          Browse products <ArrowUpRight size={16} aria-hidden="true" />
-        </Link>
+        {!onProductsPage && (
+          <Link className="button button-small header-cta" to="/collection">
+            Browse products <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
+        )}
         <button
           ref={menuButtonRef}
           className="menu-toggle"
@@ -68,9 +72,11 @@ export function SiteHeader() {
               {item.label}
             </NavLink>
           ))}
-          <Link to="/collection" onClick={() => setMenuOpen(false)}>
-            Browse products <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
+          {!onProductsPage && (
+            <Link to="/collection" onClick={() => setMenuOpen(false)}>
+              Browse products <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          )}
         </nav>
       </header>
     </>
