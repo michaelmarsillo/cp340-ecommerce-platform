@@ -45,11 +45,14 @@ export function SiteHeader() {
             </NavLink>
           ))}
         </nav>
-        {!onProductsPage && (
-          <Link className="button button-small header-cta" to="/collection">
-            Browse products <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
-        )}
+        <Link
+          className={`button button-small header-cta${onProductsPage ? ' header-cta-hidden' : ''}`}
+          to="/collection"
+          aria-hidden={onProductsPage || undefined}
+          tabIndex={onProductsPage ? -1 : undefined}
+        >
+          Browse products <ArrowUpRight size={16} aria-hidden="true" />
+        </Link>
         <button
           ref={menuButtonRef}
           className="menu-toggle"

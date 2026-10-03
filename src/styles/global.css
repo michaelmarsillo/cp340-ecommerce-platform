@@ -137,6 +137,9 @@ button {
   min-height: 99px;
   gap: 24px;
 }
+.header-cta-hidden {
+  visibility: hidden;
+}
 .wordmark {
   display: inline-flex;
   align-items: center;

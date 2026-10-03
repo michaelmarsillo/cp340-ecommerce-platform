@@ -64,6 +64,8 @@ The October 2 follow-up adds Privacy beside Blog in both navigation menus, prese
 - No horizontal overflow at the checked 821-pixel breakpoint or error-level console messages in the sampled flow.
 - These viewport checks do not reproduce physical iOS Safari; the group should confirm the updated icons on an iPhone after deployment.
 
+The group subsequently confirmed the SVG arrows on mobile Safari. A further header refinement keeps the hidden product button's layout space so the navigation does not move between pages. Local production-preview comparisons confirmed identical logo/navigation or menu-toggle coordinates between Home and Products at 1280, 821, 780, and 390 pixels, with no horizontal overflow. The hidden button is absent from accessible link queries and has `tabIndex=-1`; the mobile menu still omits its redundant product CTA. TypeScript, ESLint, Prettier, and the production build passed.
+
 ## Remaining group checks
 
 - Approve the final About, Blog, product, and privacy content.
