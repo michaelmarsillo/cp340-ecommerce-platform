@@ -1,0 +1,45 @@
+.social-links {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.site-footer > .social-links {
+  margin: 24px var(--page-gutter) 0;
+}
+
+.social-links-heading {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: normal;
+}
+
+.social-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.social-links-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  color: var(--color-forest);
+  font-size: 12px;
+}
+
+.social-links-profile:hover,
+.social-links-profile:focus-visible {
+  background: var(--color-sage);
+  border-color: var(--color-forest);
+}

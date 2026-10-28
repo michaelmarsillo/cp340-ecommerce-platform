@@ -1,6 +1,7 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BrandMark } from '../ui/BrandMark';
+import { SocialLinks } from '../ui/SocialLinks';
 
 export function SiteFooter() {
   return (
@@ -19,6 +20,7 @@ export function SiteFooter() {
           Back to the top <ArrowUpRight size={17} aria-hidden="true" />
         </a>
       </div>
+      <SocialLinks />
       <div className="container footer-bottom">
         <p>© {new Date().getFullYear()} Moss & Mind · A CP340 student project</p>
         <Link to="/privacy">Privacy & demo information</Link>
