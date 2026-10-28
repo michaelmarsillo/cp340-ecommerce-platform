@@ -1,10 +1,10 @@
 # Client architecture
 
-Reviewed **October 2, 2026**, after the Assignment 1 navigation and privacy update. This describes the implemented client; remaining assignment tasks are in [assignment-1-checklist.md](assignment-1-checklist.md).
+Reviewed **October 28, 2026**, after the Assignment 2 payment integration. Assignment 1 history is in [assignment-1-checklist.md](assignment-1-checklist.md); current requirements are in [assignment-2-checklist.md](assignment-2-checklist.md).
 
 ## Stack and routes
 
-The project is a **React + Vite + TypeScript static client**, deployed on Vercel at **https://mossandmind.vercel.app**. Michael Marsillo confirmed instructor approval for the custom platform on October 1. This is one client package with no backend, database, accounts, cart, or checkout.
+The project is a **React + Vite + TypeScript client** hosted on Vercel at **https://mossandmind.vercel.app**, with a Stripe test-checkout function added for Assignment 2. Michael Marsillo confirmed instructor approval for the custom platform on October 1. There is no database, account system, or merged cart. Checkout code requires a sandbox key and end-to-end verification before it can be considered operational; see [stripe-checkout.md](stripe-checkout.md).
 
 `src/main.tsx` wraps the app in React Router's `BrowserRouter`. `src/app/App.tsx` owns the shared header/footer and route composition:
 
@@ -62,7 +62,11 @@ The Assignment 1 PDF requires privacy settings but does not explicitly require a
 
 ## Extending later
 
-Assignments 2 and 3 have not been supplied. Add infrastructure when their requirements are known:
+Assignment 2 adds test payment checkout; Assignment 3 has not been supplied. The payment boundary is `api/checkout.ts` -> `server/checkout.ts`. The server validates IDs/quantities and resolves prices from the catalog, creates Stripe-hosted sessions, and verifies paid test sessions before returning confirmation data. The UI lives in `features/checkout/`, with `/checkout/success` and `/checkout/cancel` routes. `npm run dev` serves the handler locally; Vercel serves it as a Node function. Secrets are server-only environment values. The teammate's cart can pass multiple items through the same checkout API.
+
+The privacy page/footer now disclose Stripe-hosted test payments. There are no real charges or shipments, no application card handling, and no order database. Signed webhooks and durable fulfillment are future production requirements, not implemented by this demonstration. Earlier Assignment 1 verification entries describe the earlier static-only version.
+
+Add further infrastructure when requirements are known:
 
 - **API/backend/database:** introduce a server package or service when needed. Keep catalog fetching/mapping in its feature and shared HTTP helpers in `lib/api/`. Database credentials, migrations, authoritative prices, and validation belong on the server.
 - **Authentication:** put account UI in an `auth` feature and session setup in `app/`. Server-side authorization must protect operations; a client route guard alone is insufficient.
