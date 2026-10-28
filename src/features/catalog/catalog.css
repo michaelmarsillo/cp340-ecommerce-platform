@@ -328,6 +328,13 @@
   margin-top: 20px;
   font-size: 12px;
 }
+.dialog-copy .dialog-keep-exploring {
+  margin-top: 18px;
+  border: 0;
+  background: transparent;
+  padding-inline: 0;
+  font-size: 12px;
+}
 @media (max-width: 900px) {
   .product-art {
     min-height: 280px;

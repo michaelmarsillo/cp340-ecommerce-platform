@@ -1,5 +1,7 @@
 # Verification record
 
+**October 28, 2026 update:** Stripe test-checkout code has been added locally, with TypeScript/lint/formatting, six fixture-based security/HTTP tests, and production build passing. A real Stripe sandbox payment and deployed API have not yet been verified. See [stripe-checkout.md](stripe-checkout.md) for the current setup and evidence checklist. The October 2 records below describe the earlier static-only version.
+
 Updated **October 2, 2026**, after the navigation/privacy update. Initial navigation/privacy production application commit: **`d5cc048acfaadbb91fa0e5baaa5ba3d4953af2f2`**. Public website: **https://mossandmind.vercel.app**. This record confirms implementation and sampled checks, not assignment submission.
 
 ## Build and deployment

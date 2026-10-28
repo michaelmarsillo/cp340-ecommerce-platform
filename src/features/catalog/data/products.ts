@@ -1,4 +1,4 @@
-import type { Product } from '../types';
+import type { Product } from '../types.ts';
 
 // Fictional, static catalog. Keep product content outside presentation components.
 // A future catalog API can return this shape without changing the card components.

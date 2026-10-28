@@ -2,6 +2,14 @@ import { useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const pages: Record<string, { title: string; description: string }> = {
+  '/checkout/success': {
+    title: 'Test order confirmation | Moss & Mind',
+    description: 'Verify your Stripe test payment and view your Moss & Mind demonstration order.',
+  },
+  '/checkout/cancel': {
+    title: 'Checkout paused | Moss & Mind',
+    description: 'Return to the Moss & Mind collection after leaving Stripe test checkout.',
+  },
   '/': {
     title: 'Home | Moss & Mind',
     description:

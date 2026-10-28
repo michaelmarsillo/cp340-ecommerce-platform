@@ -1,0 +1,18 @@
+# Assignment 2 checklist
+
+Reviewed October 28, 2026 against `C:/cp340/Assignment 2 - V3.pdf`. Due **Friday, October 30, 2026, at 11:59 p.m. Toronto time**. One submission per group of 3-5 students.
+
+The status below distinguishes merged code from completed live testing. It does not assign other group members' work or establish that their unmerged branches are incomplete.
+
+| Area              | Weight | Required work                                                                         | Current evidence                                                                                                                                                                                           |
+| ----------------- | ------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shopping cart     | 13%    | Add, remove, update quantities; retain cart during navigation; correct details/totals | No cart in the inspected main branch. Coordinate with its owner.                                                                                                                                           |
+| Payment gateway   | 13%    | Secure functional sandbox/test gateway; complete checkout and confirmation            | Stripe hosted-checkout integration and security tests implemented locally. Credentials, real sandbox payment, deployment, and cart handoff remain to verify. See [stripe-checkout.md](stripe-checkout.md). |
+| SEO               | 13%    | Keywords, meta titles/descriptions, image alt text; short checklist or screenshots    | Route metadata and accessible product illustrations already exist. A2 keyword choices, image alternatives, and evidence need the SEO owner's review.                                                       |
+| Content marketing | 13%    | Target audience/brand message plan; three original posts, each 150-200 words          | Three posts already exist from A1. A2 plan, word counts, originality, and alignment need the content owner's review.                                                                                       |
+| Social media      | 13%    | Icons and/or feeds plus promotional strategy                                          | Footer social links and `social-media-strategy.md` merged. Final links/strategy need the owner's review.                                                                                                   |
+| Report            | 35%    | Concise 3-4 page PDF                                                                  | Shared report sections have not been supplied in this chat.                                                                                                                                                |
+
+The report must include group members/roles, business/site overview, implemented features/tools, marketing and SEO examples or screenshots, challenges/lessons, and the updated public website URL. Include transparent acknowledgment of AI-assisted text, code, or visuals as required by the brief. The PDF recommends screenshots of major integrations and testing of links, payments, and social connections.
+
+No authentication, Firebase database, or live money movement is explicitly required by this brief. A test gateway must be functional, not just a simulated success screen. Payment confirmation must follow verified payment status.

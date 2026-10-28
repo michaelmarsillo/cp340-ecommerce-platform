@@ -3,6 +3,8 @@ import { X } from 'lucide-react';
 import type { Product } from '../types';
 import { ProductIllustration } from './ProductIllustration';
 import { formatCurrency } from '../../../lib/formatCurrency';
+import { CheckoutButton } from '../../checkout/CheckoutButton';
+import '../../checkout/checkout.css';
 
 type ProductDetailsProps = {
   product: Product | null;
@@ -67,9 +69,12 @@ export function ProductDetails({ product, onClose }: ProductDetailsProps) {
           <strong>{formatCurrency(product.price)} CAD</strong>
         </div>
         <p className="dialog-note">
-          For a class project. This product is not available to purchase.
+          Try a secure Stripe test payment. Use test card details only; no real money is charged and
+          no product is shipped. The listed CAD price is the full demo total, with no added shipping
+          or tax.
         </p>
-        <button type="button" className="button" onClick={onClose}>
+        <CheckoutButton key={product.id} items={[{ productId: product.id, quantity: 1 }]} />
+        <button type="button" className="text-link dialog-keep-exploring" onClick={onClose}>
           Keep exploring
         </button>
       </div>
