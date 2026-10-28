@@ -20,10 +20,16 @@ const twitterIcon: IconNode = [
   ['path', { d: 'M4 3h4l12 18h-4L4 3ZM20 3l-7 8M4 21l7-8', key: 'x' }],
 ];
 
+const youtubeIcon: IconNode = [
+  ['rect', { x: 2, y: 5, width: 20, height: 14, rx: 4, key: 'frame' }],
+  ['path', { d: 'm10 9 5 3-5 3V9Z', key: 'play' }],
+];
+
 const platforms = [
   { key: 'instagram', label: 'Instagram', icon: instagramIcon },
   { key: 'linkedin', label: 'LinkedIn', icon: linkedinIcon },
   { key: 'twitter', label: 'Twitter / X', icon: twitterIcon },
+  { key: 'youtube', label: 'YouTube', icon: youtubeIcon },
 ] as const;
 
 export function SocialLinks() {

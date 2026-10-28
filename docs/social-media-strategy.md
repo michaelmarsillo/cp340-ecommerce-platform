@@ -8,6 +8,7 @@ using carousels, short Reels, and still images that fit the site's calm, earthy 
 LinkedIn is a secondary platform for sharing course-project milestones and the student
 team's work, with a footer link alongside Instagram.
 Twitter / X is also linked in the footer for short study tips and project updates.
+YouTube is linked for potential study-routine videos and project walkthroughs.
 
 ## Posting rhythm and voice
 
@@ -51,10 +52,11 @@ surfaces. No embeds, tracking scripts, campaign cookies, or analytics are needed
 
 No social profile URL has been supplied or verified. No account activity or campaign
 results are claimed. For the course demo, the footer buttons are visible and link to
-`https://www.instagram.com/`, `https://www.linkedin.com/`, and `https://x.com/` as temporary destinations,
-as requested. These are platform homepages, not Moss & Mind accounts.
+`https://www.instagram.com/`, `https://www.linkedin.com/`, `https://x.com/`, and
+`https://www.youtube.com/` as temporary destinations, as requested. Each button opens
+its platform's homepage in a new tab. These are not Moss & Mind accounts.
 
-1. Obtain the real Instagram, LinkedIn, and Twitter / X profile URLs from the Moss & Mind team and
+1. Obtain the real Instagram, LinkedIn, Twitter / X, and YouTube profile URLs from the Moss & Mind team and
    open them to confirm the accounts' identity and ownership with the team.
 2. In `src/config/social.ts`, replace the temporary homepage URLs with the full HTTPS
    profile URLs. Do not use guessed handles.
@@ -64,7 +66,7 @@ as requested. These are platform homepages, not Moss & Mind accounts.
 
 ## Manual review and assignment screenshots
 
-- Confirm the Instagram, LinkedIn, and Twitter / X buttons are visible and open their respective
+- Confirm the Instagram, LinkedIn, Twitter / X, and YouTube buttons are visible and open their respective
   homepages for the demo. Set any one to `null` to check that only that button disappears;
   with all set to `null`, no empty heading or social navigation should appear.
 - Check the footer at 375px, 768px, and 1440px
