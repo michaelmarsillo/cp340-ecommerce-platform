@@ -12,15 +12,36 @@ export function PrivacyPage() {
             A little clarity about <em>your data.</em>
           </>
         }
-        description="How this Moss & Mind demo works, what it collects, and the settings we use. Updated October 2, 2026."
+        description="How this Moss & Mind demo works, what it collects, and the settings we use. Updated October 28, 2026."
       />
       <div className="privacy-content container">
         <section aria-labelledby="privacy-demo">
           <h2 id="privacy-demo">A student project</h2>
           <p>
             Moss & Mind is a CP340 e-commerce course concept. Products, prices, and packaging are
-            fictional. This version has no accounts, checkout, payment forms, or orders, and nothing
-            is available to purchase.
+            fictional. This version has no user accounts or real purchases. Stripe test checkout
+            demonstrates payments and an order confirmation without charging real money or shipping
+            any products.
+          </p>
+        </section>
+        <section aria-labelledby="privacy-stripe">
+          <h2 id="privacy-stripe">Stripe test checkout</h2>
+          <p>
+            When you choose test checkout, our server sends the selected product names, quantities,
+            and CAD prices to Stripe. Stripe hosts the payment form and may collect the test email,
+            billing information, and test card details you enter. Use fictional test information and
+            Stripe test cards only.
+          </p>
+          <p>
+            Card details go directly to Stripe and are not handled by our application. On return,
+            our server checks the checkout status with Stripe and displays only the payment
+            reference, products, and total. We do not maintain an order database. Test sessions
+            remain in the Stripe sandbox until deleted there. Stripe may use its own cookies and
+            collect technical information on its hosted checkout. See{' '}
+            <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">
+              Stripe's privacy policy
+            </a>
+            .
           </p>
         </section>
         <section aria-labelledby="privacy-data">
@@ -41,7 +62,8 @@ export function PrivacyPage() {
           <p>
             Vercel delivers and protects this website. The hosting provider may process technical
             connection information, such as IP addresses and request logs, even though our
-            application does not collect account or payment data.
+            application does not collect account credentials or card details. Checkout references
+            are sent to our Vercel-hosted endpoint to verify test payments.
           </p>
           <p>
             See{' '}
@@ -81,8 +103,8 @@ export function PrivacyPage() {
         <section aria-labelledby="privacy-updates">
           <h2 id="privacy-updates">As the project grows</h2>
           <p>
-            If we add accounts, payments, analytics, or other services in a later version, we will
-            update this notice and review the settings before collecting that information.
+            If we add accounts, live payments, analytics, or other services in a later version, we
+            will update this notice and review the settings before collecting that information.
           </p>
         </section>
         <Link className="text-link" to="/collection">

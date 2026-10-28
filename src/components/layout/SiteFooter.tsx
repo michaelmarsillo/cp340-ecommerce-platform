@@ -29,9 +29,10 @@ export function SiteFooter() {
         <p>
           <strong>A concept, thoughtfully growing.</strong> This is a course demonstration.
           Products, prices, and packaging are fictional; nothing is available to purchase. No
-          medical claims are made. This site has no accounts, payment forms, analytics, marketing
-          cookies, or third-party trackers. Your collection filter and menu choices stay in page
-          memory and reset on reload.
+          medical claims are made. Stripe-hosted test checkout simulates payments without charging
+          real money or shipping products. Use test details only. This site has no accounts or
+          application analytics. Your collection filter and menu choices stay in page memory and
+          reset on reload.
         </p>
         <p>
           Hosted on Vercel, which may process connection information such as IP addresses and

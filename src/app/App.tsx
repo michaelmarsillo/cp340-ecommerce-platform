@@ -8,6 +8,7 @@ import { BlogPage } from '../features/blog/BlogPage';
 import { PrivacyPage } from '../features/privacy/PrivacyPage';
 import { NotFoundPage } from './NotFoundPage';
 import { RouteEffects } from './RouteEffects';
+import { CheckoutResultPage } from '../features/checkout/CheckoutResultPage';
 
 const AboutPage = lazy(() =>
   import('../features/about/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })),
@@ -41,6 +42,8 @@ export function App() {
             }
           />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/checkout/success" element={<CheckoutResultPage key="success" />} />
+          <Route path="/checkout/cancel" element={<CheckoutResultPage key="cancel" canceled />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
