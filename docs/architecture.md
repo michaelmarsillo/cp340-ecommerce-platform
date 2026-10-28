@@ -4,7 +4,7 @@ Reviewed **October 28, 2026**, after the Assignment 2 payment integration. Assig
 
 ## Stack and routes
 
-The project is a **React + Vite + TypeScript client** hosted on Vercel at **https://mossandmind.vercel.app**, with a Stripe test-checkout function added for Assignment 2. Michael Marsillo confirmed instructor approval for the custom platform on October 1. There is no database, account system, or merged cart. Checkout code requires a sandbox key and end-to-end verification before it can be considered operational; see [stripe-checkout.md](stripe-checkout.md).
+The project is a **React + Vite + TypeScript client** hosted on Vercel at **https://mossandmind.vercel.app**, with a Stripe test-checkout function added for Assignment 2. Michael Marsillo confirmed instructor approval for the custom platform on October 1. There is no database, account system, or merged cart. Checkout is connected to the separate course sandbox and verified on the public site; see [stripe-checkout.md](stripe-checkout.md).
 
 `src/main.tsx` wraps the app in React Router's `BrowserRouter`. `src/app/App.tsx` owns the shared header/footer and route composition:
 

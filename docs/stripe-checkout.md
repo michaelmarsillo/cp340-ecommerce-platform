@@ -1,6 +1,6 @@
 # Stripe test checkout
 
-Implemented for Michael Marsillo's Assignment 2 payment-gateway section on October 28, 2026. The assignment requires a secure test payment and complete checkout including confirmation. This document records implementation and setup, not proof of a completed Stripe transaction.
+Implemented for Michael Marsillo's Assignment 2 payment-gateway section on October 28, 2026. The assignment requires a secure test payment and complete checkout including confirmation. The hosted checkout, declined-payment handling, verified confirmation, and cancellation return were exercised on the public site using real Stripe sandbox transactions.
 
 ## Flow and ownership
 
@@ -15,7 +15,7 @@ There is no order database or fulfillment process. Stripe stores the test sessio
 
 ## Connect the sandbox
 
-Use the account picker in Stripe Dashboard to create/open a dedicated **Moss & Mind CP340** sandbox. The real coaching business can remain in its own live environment under the same login. Never copy business/customer data into this course demonstration.
+Use the separate **Moss & Mind - CP340 Demo** account and its **Moss & Mind - CP340 Demo sandbox**. It was created with the separate-account option, without shared organization data/reporting. It uses the same login but is separate from MarsilloMade. The saved local key was checked against the course sandbox account, and live charges are disabled. No MarsilloMade key, bank details, website, or payment settings were changed for this integration.
 
 ### Local development
 
@@ -69,16 +69,20 @@ Completed before connecting credentials:
 - `npm run build`: passed; the existing About/Three.js chunk-size notice remains non-blocking.
 - `npm audit`: zero known vulnerabilities after compatible Vite/tooling patches.
 
-Still required with the real sandbox connected:
+Public-site verification completed on October 28, 2026 (application commit `fcc502b`):
 
-- [ ] Complete a successful test payment with card `4242 4242 4242 4242`, any future expiry, and a test CVC. Use fictional contact/billing details.
-- [ ] Confirm the product, quantity, CAD amount, and successful test status in Stripe Dashboard and the application confirmation page.
-- [ ] Test a declined card such as `4000 0000 0000 0002`; it must not show a success confirmation.
-- [ ] Leave Stripe checkout and confirm the cancellation page and return link.
-- [ ] Try a missing/invalid/unpaid session reference; no successful order should be displayed.
-- [ ] Verify the deployed API returns JSON, not the SPA document, and direct confirmation/cancellation URLs load.
-- [ ] Capture the product checkout action, Stripe test payment page, successful confirmation, and successful sandbox payment for the report. Keep keys and personal information out of screenshots.
+- [x] Complete a successful test payment with card `4242 4242 4242 4242`, any future expiry, and a test CVC. Use fictional contact/billing details.
+- [x] Confirm Daily Focus, quantity 1, CAD 28.00, in the application and Stripe API. Stripe returned `livemode=false`, `status=complete`, `payment_status=paid`, and payment-intent status `succeeded`.
+- [x] Test a declined card such as `4000 0000 0000 0002`; it must not show a success confirmation.
+- [x] Leave Stripe checkout and confirm the cancellation page and return link.
+- [x] Invalid reference returned HTTP 400. The actual declined/unpaid session returned HTTP 409. Neither produced a successful confirmation.
+- [x] Verify the deployed API returns JSON, not the SPA document, and direct confirmation/cancellation URLs load.
+- [x] Capture product entry, Stripe-hosted test form, declined payment, successful confirmation, and cancellation screenshots in the local Codex artifact folder. Only fictional customer/card details were used; browser card-save prompts were declined. A Stripe Dashboard screenshot can be captured separately if desired for the report.
 - [ ] Integrate and verify the teammate's cart once it is merged, including quantities and totals.
+
+Additional deployed checks rejected browser-supplied prices and zero quantities with HTTP 400 and a foreign Origin with HTTP 403. API responses use JSON and `Cache-Control: no-store`. The test key is a server-only Vercel Secret scoped to Production; `APP_URL` is the public store origin. It is also in ignored `.env.local` for development, not Git or the client bundle.
+
+Vercel initially built the function using the root TypeScript config and reported TS5097 import-extension errors, despite a Ready deployment. The root config now uses NodeNext resolution and rewrites TypeScript import extensions for JavaScript output. The emitted handler loaded in a local runtime check; the corrected deployed API and full browser flow passed afterward.
 
 ## Sources and acknowledgment
 
