@@ -2,7 +2,14 @@ import { products } from '../catalog/data/products.ts';
 import type { CheckoutItem } from '../checkout/types.ts';
 
 export const CART_KEY = 'moss-and-mind-cart';
-export const MAX_QUANTITY = 10;
+
+export function validQuantity(quantity: number): boolean {
+  return Number.isSafeInteger(quantity) && quantity > 0;
+}
+
+function safeTotal(items: CheckoutItem[]): boolean {
+  return Number.isSafeInteger(cartTotalCents(items));
+}
 
 export function restoreCart(raw: string | null): CheckoutItem[] {
   if (!raw) return [];
@@ -10,7 +17,8 @@ export function restoreCart(raw: string | null): CheckoutItem[] {
     const value: unknown = JSON.parse(raw);
     if (!Array.isArray(value)) return [];
     const seen = new Set<string>();
-    return value.flatMap((item: unknown) => {
+    const restored: CheckoutItem[] = [];
+    for (const item of value) {
       if (
         typeof item !== 'object' ||
         item === null ||
@@ -20,16 +28,17 @@ export function restoreCart(raw: string | null): CheckoutItem[] {
         !('quantity' in item) ||
         typeof item.productId !== 'string' ||
         typeof item.quantity !== 'number' ||
-        !Number.isInteger(item.quantity) ||
-        item.quantity < 1 ||
-        item.quantity > MAX_QUANTITY ||
+        !validQuantity(item.quantity) ||
         !products.some((product) => product.id === item.productId) ||
         seen.has(item.productId)
       )
-        return [];
+        continue;
+      const next = { productId: item.productId, quantity: item.quantity };
+      if (!safeTotal([...restored, next])) continue;
       seen.add(item.productId);
-      return [{ productId: item.productId, quantity: item.quantity }];
-    });
+      restored.push(next);
+    }
+    return restored;
   } catch {
     return [];
   }
@@ -38,12 +47,13 @@ export function restoreCart(raw: string | null): CheckoutItem[] {
 export function addItem(items: CheckoutItem[], productId: string): CheckoutItem[] {
   if (!products.some((product) => product.id === productId)) return items;
   const existing = items.find((item) => item.productId === productId);
-  if (existing?.quantity === MAX_QUANTITY) return items;
-  return existing
+  if (existing && !validQuantity(existing.quantity + 1)) return items;
+  const next = existing
     ? items.map((item) =>
         item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item,
       )
     : [...items, { productId, quantity: 1 }];
+  return safeTotal(next) ? next : items;
 }
 
 export function setQuantity(
@@ -51,8 +61,9 @@ export function setQuantity(
   productId: string,
   quantity: number,
 ): CheckoutItem[] {
-  if (!Number.isInteger(quantity) || quantity < 1 || quantity > MAX_QUANTITY) return items;
-  return items.map((item) => (item.productId === productId ? { ...item, quantity } : item));
+  if (!validQuantity(quantity)) return items;
+  const next = items.map((item) => (item.productId === productId ? { ...item, quantity } : item));
+  return safeTotal(next) ? next : items;
 }
 
 export function cartTotalCents(items: CheckoutItem[]): number {

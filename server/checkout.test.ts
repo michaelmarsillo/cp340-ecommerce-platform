@@ -51,6 +51,11 @@ test('prices and currency are calculated from the catalog for multiple items', (
     parameters.success_url,
     `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
   );
+  const large = checkoutParameters(
+    { items: [{ productId: 'daily-focus', quantity: 1000 }] },
+    origin,
+  );
+  assert.equal(large.line_items?.[0]?.quantity, 1000);
 });
 
 test('invalid products, duplicate entries, quantities, and browser-supplied prices are rejected', () => {
@@ -58,7 +63,8 @@ test('invalid products, duplicate entries, quantities, and browser-supplied pric
     [],
     [{ productId: 'not-a-product', quantity: 1 }],
     [{ productId: 'daily-focus', quantity: 0 }],
-    [{ productId: 'daily-focus', quantity: 11 }],
+    [{ productId: 'daily-focus', quantity: -1 }],
+    [{ productId: 'daily-focus', quantity: Number.MAX_SAFE_INTEGER }],
     [{ productId: 'daily-focus', quantity: 1.5 }],
     [{ productId: 'daily-focus', quantity: '2' }],
     [{ productId: 'daily-focus', quantity: 1, price: 1 }],

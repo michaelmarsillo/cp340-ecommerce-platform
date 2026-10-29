@@ -9,7 +9,7 @@ import { ProductDetails } from './ProductDetails';
 import { formatCurrency } from '../../../lib/formatCurrency';
 import '../catalog.css';
 import { useCart } from '../../cart/context';
-import { MAX_QUANTITY } from '../../cart/cart';
+import { addItem } from '../../cart/cart';
 import { flyToCart } from '../../cart/flyToCart';
 
 type ProductCollectionProps = {
@@ -119,9 +119,7 @@ export function ProductCollection({ variant = 'preview' }: ProductCollectionProp
                 add(product.id);
                 flyToCart(art);
               }}
-              disabled={
-                items.find((item) => item.productId === product.id)?.quantity === MAX_QUANTITY
-              }
+              disabled={addItem(items, product.id) === items}
               aria-label={`Add ${product.name} to cart`}
             >
               <Plus size={16} aria-hidden="true" /> Add to cart

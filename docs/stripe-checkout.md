@@ -45,7 +45,7 @@ The SPA rewrite excludes `/api/` so Vercel can execute `api/checkout.ts`. The ha
 
 ## Cart integration
 
-The cart in `src/features/cart/` shares React state across routes and stores only product IDs and quantities in localStorage. It restores validated entries and looks up current product details and CAD prices in the catalog. Each product appears once with quantity 1-10. The header button opens a side drawer with quantity, removal, and checkout controls; the `/cart` page remains available for direct links. Both pass IDs and quantities to the existing `CheckoutButton` and `/api/checkout`. The server still sets authoritative prices and currency. No tax or shipping is added. Two Daily Focus and one Evening Unwind total CAD $82.00.
+The cart in `src/features/cart/` shares React state across routes and stores only product IDs and quantities in localStorage. It restores validated entries and looks up current product details and CAD prices in the catalog. Each product appears once with a positive whole-number quantity; there is no 10-unit cap. The header button opens a side drawer with increment, decrement, direct quantity entry, removal, and checkout controls; the `/cart` page remains available for direct links. Both pass IDs and quantities to the existing `CheckoutButton` and `/api/checkout`. The server still sets authoritative prices and currency. Totals must remain within JavaScript's safe integer range, and Stripe/card-network amount limits still apply. No tax or shipping is added. Two Daily Focus and one Evening Unwind total CAD $82.00.
 
 Cancellation, declined payments, and checkout errors leave the cart intact. The cart also remains after a verified payment, so an old success URL cannot remove newer additions. Users can remove entries in the cart or clear this site's browser data. There is no order database or fulfillment process.
 
@@ -67,7 +67,7 @@ Public-site verification completed on October 28, 2026 (application commit `fcc5
 - [x] Invalid reference returned HTTP 400. The actual declined/unpaid session returned HTTP 409. Neither produced a successful confirmation.
 - [x] Verify the deployed API returns JSON, not the SPA document, and direct confirmation/cancellation URLs load.
 - [x] Capture product entry, Stripe-hosted test form, declined payment, successful confirmation, and cancellation screenshots in the local Codex artifact folder. Only fictional customer/card details were used; browser card-save prompts were declined. A Stripe Dashboard screenshot can be captured separately if desired for the report.
-- [x] Integrate the cart with the existing checkout button and server request shape. Unit tests cover repeated additions, quantity limits, restored data, and CAD $82.00 total.
+- [x] Integrate the cart with the existing checkout button and server request shape. Unit tests cover repeated additions, quantities above 10, safe totals, restored data, and CAD $82.00 total.
 - [ ] Exercise the cart through a real Stripe sandbox session for success, decline, and cancellation with available credentials. No local sandbox key was available during this cart implementation.
 
 Additional deployed checks rejected browser-supplied prices and zero quantities with HTTP 400 and a foreign Origin with HTTP 403. API responses use JSON and `Cache-Control: no-store`. The test key is a server-only Vercel Secret scoped to Production; `APP_URL` is the public store origin. It is also in ignored `.env.local` for development, not Git or the client bundle.

@@ -6,7 +6,7 @@ import { formatCurrency } from '../../../lib/formatCurrency';
 import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { useCart } from '../../cart/context';
-import { MAX_QUANTITY } from '../../cart/cart';
+import { addItem } from '../../cart/cart';
 import { flyToCart } from '../../cart/flyToCart';
 
 type ProductDetailsProps = {
@@ -88,7 +88,7 @@ export function ProductDetails({ product, onClose }: ProductDetailsProps) {
               onClose();
             });
           }}
-          disabled={items.find((item) => item.productId === product.id)?.quantity === MAX_QUANTITY}
+          disabled={addItem(items, product.id) === items}
         >
           <ShoppingBag size={17} aria-hidden="true" /> Add to cart
         </button>

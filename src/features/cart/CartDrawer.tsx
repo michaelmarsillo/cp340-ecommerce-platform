@@ -1,10 +1,11 @@
 import { useEffect, useRef, type RefObject } from 'react';
 import { Link } from 'react-router-dom';
-import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
+import { ShoppingBag, Trash2, X } from 'lucide-react';
 import { products } from '../catalog/data/products';
 import { CheckoutButton } from '../checkout/CheckoutButton';
 import { useCart } from './context';
-import { cartTotalCents, MAX_QUANTITY } from './cart';
+import { cartTotalCents } from './cart';
+import { QuantityControl } from './QuantityControl';
 import './cart.css';
 import '../checkout/checkout.css';
 
@@ -19,7 +20,7 @@ export function CartDrawer({
   triggerRef: RefObject<HTMLButtonElement | null>;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { items, update, remove } = useCart();
+  const { items, remove } = useCart();
   const lines = items.flatMap((item) => {
     const product = products.find((entry) => entry.id === item.productId);
     return product ? [{ ...item, product }] : [];
@@ -91,29 +92,11 @@ export function CartDrawer({
                     <strong>{money(Math.round(product.price * 100) * quantity)} CAD</strong>
                   </div>
                   <div className="cart-line-actions">
-                    <div
-                      className="quantity-control"
-                      role="group"
-                      aria-label={`${product.name} quantity`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => update(product.id, quantity - 1)}
-                        disabled={quantity <= 1}
-                        aria-label={`Decrease ${product.name} quantity`}
-                      >
-                        <Minus size={16} aria-hidden="true" />
-                      </button>
-                      <output aria-label={`${product.name} quantity`}>{quantity}</output>
-                      <button
-                        type="button"
-                        onClick={() => update(product.id, quantity + 1)}
-                        disabled={quantity >= MAX_QUANTITY}
-                        aria-label={`Increase ${product.name} quantity`}
-                      >
-                        <Plus size={16} aria-hidden="true" />
-                      </button>
-                    </div>
+                    <QuantityControl
+                      productId={product.id}
+                      name={product.name}
+                      quantity={quantity}
+                    />
                     <button
                       className="cart-remove"
                       type="button"

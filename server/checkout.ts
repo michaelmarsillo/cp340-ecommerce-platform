@@ -61,25 +61,29 @@ export function checkoutParameters(
   }
 
   const seen = new Set<string>();
+  let totalCents = 0;
   const lineItems = body.items.map((item: unknown) => {
     if (
       !isRecord(item) ||
       Object.keys(item).some((key) => key !== 'productId' && key !== 'quantity') ||
       typeof item.productId !== 'string' ||
       typeof item.quantity !== 'number' ||
-      !Number.isInteger(item.quantity) ||
+      !Number.isSafeInteger(item.quantity) ||
       item.quantity < 1 ||
-      item.quantity > 10 ||
       seen.has(item.productId)
     ) {
       throw new CheckoutError(
         400,
-        'Each product needs a quantity from 1 to 10 and one cart entry.',
+        'Each product needs a positive whole-number quantity and one cart entry.',
       );
     }
     const product = products.find((entry) => entry.id === item.productId);
     if (!product) throw new CheckoutError(400, 'One of these products is no longer available.');
     seen.add(product.id);
+    totalCents += Math.round(product.price * 100) * item.quantity;
+    if (!Number.isSafeInteger(totalCents)) {
+      throw new CheckoutError(400, 'This cart total is too large for checkout.');
+    }
 
     // Prices and currency come from the deployed catalog, never from the browser.
     return {
