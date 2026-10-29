@@ -9,7 +9,6 @@ async function responseData(response: Response) {
   return data;
 }
 
-// The cart can pass its product IDs and quantities to this same function when it is merged.
 export async function startCheckout(items: CheckoutItem[]): Promise<void> {
   const data = await responseData(
     await fetch('/api/checkout', {

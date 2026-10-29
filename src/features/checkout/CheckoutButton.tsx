@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowUpRight, LoaderCircle, LockKeyhole } from 'lucide-react';
 import { startCheckout } from './api';
 import type { CheckoutItem } from './types';
 
 export function CheckoutButton({ items }: { items: CheckoutItem[] }) {
   const [pending, setPending] = useState(false);
+  const submitting = useRef(false);
   const [error, setError] = useState('');
 
   async function checkout() {
-    if (pending) return;
+    if (submitting.current || items.length === 0) return;
+    submitting.current = true;
     setPending(true);
     setError('');
     try {
@@ -18,12 +20,18 @@ export function CheckoutButton({ items }: { items: CheckoutItem[] }) {
         error instanceof Error ? error.message : 'Checkout could not open. Please try again.',
       );
       setPending(false);
+      submitting.current = false;
     }
   }
 
   return (
     <div className="checkout-action">
-      <button className="button" type="button" onClick={checkout} disabled={pending}>
+      <button
+        className="button"
+        type="button"
+        onClick={checkout}
+        disabled={pending || items.length === 0}
+      >
         {pending ? (
           <LoaderCircle size={17} aria-hidden="true" />
         ) : (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products, catalogFilters } from '../data/products';
 import type { CatalogFilter } from '../data/products';
@@ -8,12 +8,16 @@ import { ProductIllustration } from './ProductIllustration';
 import { ProductDetails } from './ProductDetails';
 import { formatCurrency } from '../../../lib/formatCurrency';
 import '../catalog.css';
+import { useCart } from '../../cart/context';
+import { MAX_QUANTITY } from '../../cart/cart';
+import { flyToCart } from '../../cart/flyToCart';
 
 type ProductCollectionProps = {
   variant?: 'preview' | 'full';
 };
 
 export function ProductCollection({ variant = 'preview' }: ProductCollectionProps) {
+  const { items, add } = useCart();
   const isFullCollection = variant === 'full';
   const [filter, setFilter] = useState<CatalogFilter>('All rituals');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -104,6 +108,24 @@ export function ProductCollection({ variant = 'preview' }: ProductCollectionProp
                 {formatCurrency(product.price)} <small>CAD</small>
               </span>
             </div>
+            <button
+              className="product-add"
+              type="button"
+              onClick={(event) => {
+                const art =
+                  event.currentTarget
+                    .closest('.product-card')
+                    ?.querySelector('.product-illustration') ?? null;
+                add(product.id);
+                flyToCart(art);
+              }}
+              disabled={
+                items.find((item) => item.productId === product.id)?.quantity === MAX_QUANTITY
+              }
+              aria-label={`Add ${product.name} to cart`}
+            >
+              <Plus size={16} aria-hidden="true" /> Add to cart
+            </button>
           </article>
         ))}
       </div>

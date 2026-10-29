@@ -9,6 +9,8 @@ import { PrivacyPage } from '../features/privacy/PrivacyPage';
 import { NotFoundPage } from './NotFoundPage';
 import { RouteEffects } from './RouteEffects';
 import { CheckoutResultPage } from '../features/checkout/CheckoutResultPage';
+import { CartProvider } from '../features/cart/CartContext';
+import { CartPage } from '../features/cart/CartPage';
 
 const AboutPage = lazy(() =>
   import('../features/about/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })),
@@ -16,7 +18,7 @@ const AboutPage = lazy(() =>
 
 export function App() {
   return (
-    <>
+    <CartProvider>
       <RouteEffects />
       <a className="skip-link" href="#main-content">
         Skip to content
@@ -42,12 +44,13 @@ export function App() {
             }
           />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout/success" element={<CheckoutResultPage key="success" />} />
           <Route path="/checkout/cancel" element={<CheckoutResultPage key="cancel" canceled />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <SiteFooter />
-    </>
+    </CartProvider>
   );
 }

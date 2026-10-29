@@ -1,7 +1,9 @@
 import { Link, NavLink, useMatch } from 'react-router-dom';
 import { useRef, useState } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, ShoppingBag, X } from 'lucide-react';
 import { BrandMark } from '../ui/BrandMark';
+import { useCart } from '../../features/cart/context';
+import { CartDrawer } from '../../features/cart/CartDrawer';
 
 const navigation = [
   { label: 'Home', href: '/' },
@@ -12,9 +14,17 @@ const navigation = [
 ];
 
 export function SiteHeader() {
+  const { items } = useCart();
+  const cartCount = items.reduce((count, item) => count + item.quantity, 0);
   const onProductsPage = useMatch('/collection') !== null;
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const cartButtonRef = useRef<HTMLButtonElement>(null);
+
+  function closeCart() {
+    setCartOpen(false);
+  }
 
   return (
     <>
@@ -64,6 +74,24 @@ export function SiteHeader() {
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+        <button
+          ref={cartButtonRef}
+          className="header-cart"
+          type="button"
+          aria-label={`Open cart, ${cartCount} items`}
+          aria-expanded={cartOpen}
+          aria-haspopup="dialog"
+          onClick={() => {
+            setMenuOpen(false);
+            setCartOpen(true);
+          }}
+        >
+          <ShoppingBag size={19} aria-hidden="true" />
+          <span>Cart</span>
+          <span className="cart-count" aria-hidden="true">
+            {cartCount}
+          </span>
+        </button>
         <nav
           id="mobile-navigation"
           className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
@@ -82,6 +110,7 @@ export function SiteHeader() {
           )}
         </nav>
       </header>
+      {cartOpen && <CartDrawer onClose={closeCart} triggerRef={cartButtonRef} />}
     </>
   );
 }

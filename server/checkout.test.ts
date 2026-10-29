@@ -30,15 +30,23 @@ test('prices and currency are calculated from the catalog for multiple items', (
     {
       items: [
         { productId: 'daily-focus', quantity: 2 },
-        { productId: 'pause-tea', quantity: 1 },
+        { productId: 'evening-unwind', quantity: 1 },
       ],
     },
     origin,
   );
   assert.equal(parameters.line_items?.[0]?.price_data?.unit_amount, 2800);
   assert.equal(parameters.line_items?.[0]?.price_data?.currency, 'cad');
-  assert.equal(parameters.line_items?.[1]?.price_data?.unit_amount, 1800);
+  assert.equal(parameters.line_items?.[1]?.price_data?.unit_amount, 2600);
   assert.equal(parameters.line_items?.[0]?.quantity, 2);
+  assert.equal(parameters.line_items?.[1]?.quantity, 1);
+  assert.equal(
+    parameters.line_items?.reduce(
+      (total, item) => total + (item.price_data?.unit_amount ?? 0) * (item.quantity ?? 0),
+      0,
+    ),
+    8200,
+  );
   assert.equal(
     parameters.success_url,
     `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
