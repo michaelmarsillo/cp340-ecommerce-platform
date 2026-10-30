@@ -43,22 +43,11 @@ Redeploy after changing environment variables. For a separate preview deployment
 
 The SPA rewrite excludes `/api/` so Vercel can execute `api/checkout.ts`. The handler delegates to `server/checkout.ts`. The Stripe SDK is only imported by server code; it is not included in the browser application.
 
-## Connect the teammate's cart
+## Cart integration
 
-The merged branch had no cart on October 28. Product details currently check out one unit. A future cart can reuse `CheckoutButton` or `startCheckout` from `src/features/checkout/`:
+The cart in `src/features/cart/` shares React state across routes and stores only product IDs and quantities in localStorage. It restores validated entries and looks up current product details and CAD prices in the catalog. Each product appears once with a positive whole-number quantity; there is no 10-unit cap. The header button opens a side drawer with increment, decrement, direct quantity entry, removal, and checkout controls; the `/cart` page remains available for direct links. Both pass IDs and quantities to the existing `CheckoutButton` and `/api/checkout`. The server still sets authoritative prices and currency. Totals must remain within JavaScript's safe integer range, and Stripe/card-network amount limits still apply. No tax or shipping is added. Two Daily Focus and one Evening Unwind total CAD $82.00.
 
-```tsx
-<CheckoutButton
-  items={cartItems.map((item) => ({
-    productId: item.product.id,
-    quantity: item.quantity,
-  }))}
-/>
-```
-
-Adapt the example to the actual cart type. Import `checkout.css` if the cart doesn't already load it. Each unique catalog product appears once, with integer quantity 1-10. The endpoint accepts 1-5 different products and rejects unknown products, duplicate entries, invalid quantities, and extra pricing/redirect fields. Send IDs and quantities only; prices and currency are authoritative on the server.
-
-The demo adds no tax or shipping. The listed product prices make up the entire test total. Cart totals must use the same policy, and the cart owner should clear a checked-out cart only after successful server verification, not merely on visiting a success URL.
+Cancellation, declined payments, and checkout errors leave the cart intact. The cart also remains after a verified payment, so an old success URL cannot remove newer additions. Users can remove entries in the cart or clear this site's browser data. There is no order database or fulfillment process.
 
 ## Verification and evidence
 
@@ -78,7 +67,8 @@ Public-site verification completed on October 28, 2026 (application commit `fcc5
 - [x] Invalid reference returned HTTP 400. The actual declined/unpaid session returned HTTP 409. Neither produced a successful confirmation.
 - [x] Verify the deployed API returns JSON, not the SPA document, and direct confirmation/cancellation URLs load.
 - [x] Capture product entry, Stripe-hosted test form, declined payment, successful confirmation, and cancellation screenshots in the local Codex artifact folder. Only fictional customer/card details were used; browser card-save prompts were declined. A Stripe Dashboard screenshot can be captured separately if desired for the report.
-- [ ] Integrate and verify the teammate's cart once it is merged, including quantities and totals.
+- [x] Integrate the cart with the existing checkout button and server request shape. Unit tests cover repeated additions, quantities above 10, safe totals, restored data, and CAD $82.00 total.
+- [ ] Exercise the cart through a real Stripe sandbox session for success, decline, and cancellation with available credentials. No local sandbox key was available during this cart implementation.
 
 Additional deployed checks rejected browser-supplied prices and zero quantities with HTTP 400 and a foreign Origin with HTTP 403. API responses use JSON and `Cache-Control: no-store`. The test key is a server-only Vercel Secret scoped to Production; `APP_URL` is the public store origin. It is also in ignored `.env.local` for development, not Git or the client bundle.
 
@@ -93,4 +83,4 @@ Vercel initially built the function using the root TypeScript config and reporte
 - [Sandbox management](https://docs.stripe.com/sandboxes/dashboard/manage)
 - [Vercel Node functions](https://vercel.com/docs/functions/runtimes/node-js)
 
-This implementation and its initial documentation were developed with OpenAI Codex assistance. The student should review the code, run and verify the real sandbox transaction, and acknowledge AI assistance in the submitted report according to the assignment brief. This note does not claim that the student has already performed that review or transaction. Report drafting and hour logging will be completed separately using the student's supplied sections and actual work record.
+The Stripe integration, cart code, tests, and documentation were developed with OpenAI Codex assistance. The student should review the code, run and verify the cart's real sandbox transaction, and acknowledge AI assistance in the submitted report according to the assignment brief. This note does not claim that the student has already performed that review or transaction. Report drafting and hour logging will be completed separately using the student's supplied sections and actual work record.

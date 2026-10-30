@@ -3,8 +3,11 @@ import { X } from 'lucide-react';
 import type { Product } from '../types';
 import { ProductIllustration } from './ProductIllustration';
 import { formatCurrency } from '../../../lib/formatCurrency';
-import { CheckoutButton } from '../../checkout/CheckoutButton';
-import '../../checkout/checkout.css';
+import { Link } from 'react-router-dom';
+import { ShoppingBag } from 'lucide-react';
+import { useCart } from '../../cart/context';
+import { addItem } from '../../cart/cart';
+import { flyToCart } from '../../cart/flyToCart';
 
 type ProductDetailsProps = {
   product: Product | null;
@@ -12,6 +15,7 @@ type ProductDetailsProps = {
 };
 
 export function ProductDetails({ product, onClose }: ProductDetailsProps) {
+  const { items, add } = useCart();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export function ProductDetails({ product, onClose }: ProductDetailsProps) {
     document.body.style.overflow = 'hidden';
 
     return () => {
-      dialog.close();
+      if (dialog.open) dialog.close();
       document.body.style.overflow = previousOverflow;
       if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
         previousFocus.focus({ preventScroll: true });
@@ -69,14 +73,28 @@ export function ProductDetails({ product, onClose }: ProductDetailsProps) {
           <strong>{formatCurrency(product.price)} CAD</strong>
         </div>
         <p className="dialog-note">
-          Try a secure Stripe test payment. Use test card details only; no real money is charged and
-          no product is shipped. The listed CAD price is the full demo total, with no added shipping
-          or tax.
+          Add this concept product to your cart, then try secure Stripe test checkout. Use test card
+          details only; no real money is charged and no product is shipped. No tax or shipping is
+          added.
         </p>
-        <CheckoutButton key={product.id} items={[{ productId: product.id, quantity: 1 }]} />
-        <button type="button" className="text-link dialog-keep-exploring" onClick={onClose}>
-          Keep exploring
+        <button
+          className="button"
+          type="button"
+          onClick={() => {
+            const art = dialogRef.current?.querySelector('.product-illustration') ?? null;
+            add(product.id);
+            flyToCart(art, () => {
+              dialogRef.current?.close();
+              onClose();
+            });
+          }}
+          disabled={addItem(items, product.id) === items}
+        >
+          <ShoppingBag size={17} aria-hidden="true" /> Add to cart
         </button>
+        <Link className="text-link dialog-cart-link" to="/cart" onClick={onClose}>
+          View cart
+        </Link>
       </div>
     </dialog>
   );

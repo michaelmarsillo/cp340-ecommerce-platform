@@ -12,7 +12,7 @@ export function PrivacyPage() {
             A little clarity about <em>your data.</em>
           </>
         }
-        description="How this Moss & Mind demo works, what it collects, and the settings we use. Updated October 28, 2026."
+        description="How this Moss & Mind demo works, what it collects, and the settings we use. Updated October 29, 2026."
       />
       <div className="privacy-content container">
         <section aria-labelledby="privacy-demo">
@@ -45,11 +45,18 @@ export function PrivacyPage() {
           </p>
         </section>
         <section aria-labelledby="privacy-data">
-          <h2 id="privacy-data">Your choices stay in the page</h2>
+          <h2 id="privacy-data">Cart storage and page choices</h2>
+          <p>
+            Your cart is saved in this browser's local storage as product IDs and quantities. It
+            survives navigation, refreshes, and returning from Stripe. Current product details and
+            prices come from our catalog, not from stored cart data. Remove items in the cart or
+            clear this site's browser data to delete it. The cart is not automatically cleared after
+            a test payment.
+          </p>
           <p>
             Product filters, open product details, the navigation menu, and expanded Blog posts use
-            temporary page state. They reset when you reload. Our application does not write cookies
-            or save these choices in local or session storage.
+            temporary page state and reset when you reload. Our application does not write cookies
+            or save those choices in local or session storage.
           </p>
           <p>
             We have not installed analytics or advertising trackers, embedded third-party content,

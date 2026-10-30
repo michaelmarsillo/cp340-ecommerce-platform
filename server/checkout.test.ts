@@ -30,19 +30,32 @@ test('prices and currency are calculated from the catalog for multiple items', (
     {
       items: [
         { productId: 'daily-focus', quantity: 2 },
-        { productId: 'pause-tea', quantity: 1 },
+        { productId: 'evening-unwind', quantity: 1 },
       ],
     },
     origin,
   );
   assert.equal(parameters.line_items?.[0]?.price_data?.unit_amount, 2800);
   assert.equal(parameters.line_items?.[0]?.price_data?.currency, 'cad');
-  assert.equal(parameters.line_items?.[1]?.price_data?.unit_amount, 1800);
+  assert.equal(parameters.line_items?.[1]?.price_data?.unit_amount, 2600);
   assert.equal(parameters.line_items?.[0]?.quantity, 2);
+  assert.equal(parameters.line_items?.[1]?.quantity, 1);
+  assert.equal(
+    parameters.line_items?.reduce(
+      (total, item) => total + (item.price_data?.unit_amount ?? 0) * (item.quantity ?? 0),
+      0,
+    ),
+    8200,
+  );
   assert.equal(
     parameters.success_url,
     `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
   );
+  const large = checkoutParameters(
+    { items: [{ productId: 'daily-focus', quantity: 1000 }] },
+    origin,
+  );
+  assert.equal(large.line_items?.[0]?.quantity, 1000);
 });
 
 test('invalid products, duplicate entries, quantities, and browser-supplied prices are rejected', () => {
@@ -50,7 +63,8 @@ test('invalid products, duplicate entries, quantities, and browser-supplied pric
     [],
     [{ productId: 'not-a-product', quantity: 1 }],
     [{ productId: 'daily-focus', quantity: 0 }],
-    [{ productId: 'daily-focus', quantity: 11 }],
+    [{ productId: 'daily-focus', quantity: -1 }],
+    [{ productId: 'daily-focus', quantity: Number.MAX_SAFE_INTEGER }],
     [{ productId: 'daily-focus', quantity: 1.5 }],
     [{ productId: 'daily-focus', quantity: '2' }],
     [{ productId: 'daily-focus', quantity: 1, price: 1 }],
