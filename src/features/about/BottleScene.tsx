@@ -168,7 +168,7 @@ export function BottleScene({ sectionRef }: BottleSceneProps) {
     <div
       className="about-bottle-stage"
       role="img"
-      aria-label="3D Moss and Mind Daily Focus bottle that rotates as you scroll"
+      aria-label="Three-dimensional illustration of the Moss & Mind Daily Focus bottle; it rotates as you scroll"
     >
       <div className="about-bottle-halo" aria-hidden="true" />
       <div className="about-bottle-ring about-bottle-ring-one" aria-hidden="true" />

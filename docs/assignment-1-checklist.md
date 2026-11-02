@@ -53,3 +53,5 @@ The brief requires appropriate privacy settings but does not specify a particula
 Adding team names/biographies to About is optional; the brief does not demand biographies. About's Three.js chunk-size warning does not prevent deployment, but performance can be improved later. Aligning Vercel's dashboard Node setting with package Node 22 would remove an informational warning.
 
 The PDF does not require individual URLs for every product, authentication, a database, a cart, or checkout. Those features should follow the actual Assignment 2 and 3 briefs. This version demonstrates a clearer browsing path without pretending to accept purchases.
+
+**Assignment 2 update:** The course-demo exclusion above records the Assignment 1 setting. The SEO work now makes public content eligible for indexing and keeps cart, checkout-result, and missing pages excluded. See [the SEO report](seo-report.md).

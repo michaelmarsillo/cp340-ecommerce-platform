@@ -18,8 +18,8 @@ export function AboutPage() {
             </h1>
             <p>
               Between early lectures, late library sessions, and everything in between, student life
-              asks a lot of you. Moss & Mind is a student-focused concept for nootropics and simple
-              daily rituals, built around making space for your own pace.
+              asks a lot of you. Moss & Mind explores student wellness routines and everyday
+              wellness rituals, with room for study balance at your own pace.
             </p>
             <span className="about-scroll-cue">
               KEEP SCROLLING TO EXPLORE <span aria-hidden="true">↓</span>

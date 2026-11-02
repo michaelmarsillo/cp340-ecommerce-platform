@@ -25,7 +25,7 @@ export function ProductIllustration({
       className={`product-illustration ${variant} tone-${tone} ${className}`}
       style={style}
       role="img"
-      aria-label={`Illustrated Moss and Mind ${name} ${variant}`}
+      aria-label={`Moss & Mind ${name} ${variant} packaging illustration, fictional product concept`}
     >
       {variant === 'bottle' && <div className="bottle-cap" />}
       <div className="package-body">

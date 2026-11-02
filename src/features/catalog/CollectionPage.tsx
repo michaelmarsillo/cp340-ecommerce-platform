@@ -12,7 +12,7 @@ export function CollectionPage() {
             Made for the <em>everyday ritual.</em>
           </>
         }
-        description="For early lectures, slow evenings, and the moments in between. Find a little something for your own pace."
+        description="Explore fictional student wellness products for everyday wellness rituals, from Mindful Matcha to The Pause Tea. Details and prices are illustrative."
       />
       <ProductCollection variant="full" />
     </div>

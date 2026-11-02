@@ -5,7 +5,7 @@ import { posts } from './data/posts';
 import './blog.css';
 
 // Group posts by series, keeping the order they appear in posts.ts.
-const groups = posts.reduce<{ series: string; items: typeof posts[number][] }[]>((acc, post) => {
+const groups = posts.reduce<{ series: string; items: (typeof posts)[number][] }[]>((acc, post) => {
   const group = acc.find((g) => g.series === post.series);
   if (group) group.items.push(post);
   else acc.push({ series: post.series, items: [post] });
@@ -22,7 +22,7 @@ export function BlogPage() {
             Notes from the <em>growing</em> project.
           </>
         }
-        description="Short updates from the Moss & Mind team about the ideas, design, and the things we're learning along the way."
+        description="Read field notes on mindful study breaks, student life, and the everyday rituals behind Moss & Mind's fictional product concepts."
       />
       <section className="blog-list container" aria-label="Field notes">
         {groups.map((group, index) => (

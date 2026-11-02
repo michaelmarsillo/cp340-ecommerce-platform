@@ -90,8 +90,8 @@ export function PrivacyPage() {
           <ul>
             <li>The public website uses HTTPS and remains accessible for course review.</li>
             <li>
-              We ask search engines not to index or follow the demo using noindex and nofollow
-              directives. These requests are not password protection.
+              Public pages can appear in search results. Cart, checkout-result, and missing pages
+              request no indexing; these crawler directives are not password protection.
             </li>
             <li>
               Our referrer policy does not send the page address when you follow links to other

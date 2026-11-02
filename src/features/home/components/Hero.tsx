@@ -32,8 +32,8 @@ export function Hero() {
           <em>Your next chapter.</em>
         </h1>
         <p className="hero-description">
-          Nootropics and everyday rituals, with students in mind. A little space for balance in a
-          world that keeps you busy.
+          Our take on student wellness routines starts with everyday rituals, mindful study breaks,
+          and room for study balance.
         </p>
         <div className="hero-actions">
           <Link className="button" to="/collection">
@@ -50,7 +50,7 @@ export function Hero() {
       <div
         className="hero-art"
         role="img"
-        aria-label="Illustrated Daily Focus and Evening Unwind bottles surrounded by botanical leaves on a lavender background"
+        aria-label="Botanical illustration of the Moss & Mind Daily Focus and Evening Unwind bottle concepts surrounded by leaves"
       >
         <div className="hero-art-grain" />
         <div className="hero-orbit hero-orbit-one" />
